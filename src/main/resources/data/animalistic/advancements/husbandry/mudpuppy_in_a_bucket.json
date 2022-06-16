@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:husbandry/tactical_fishing",
+  "display": {
+    "icon": {
+      "item": "animalistic:mudpuppy_bucket"
+    },
+    "title": {
+      "translate": "advancements.husbandry.mudpuppy_in_a_bucket.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.mudpuppy_in_a_bucket.description"
+    }
+  },
+  "criteria": {
+    "mudpuppy_bucket": {
+      "trigger": "minecraft:filled_bucket",
+      "conditions": {
+        "item": {
+          "items": [
+            "animalistic:mudpuppy_bucket"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mudpuppy_bucket"
+    ]
+  ]
+}

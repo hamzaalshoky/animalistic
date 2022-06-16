@@ -1,0 +1,15 @@
+{
+  "advancements.husbandry.mudpuppy_in_a_bucket.title": "The Axolotl's Younger Cousin",
+  "advancements.husbandry.mudpuppy_in_a_bucket.description": "Catch a mudpuppy in a bucket",
+  "advancements.husbandry.kill_a_cavy.title": "Why would you even do that?",
+  "advancements.husbandry.kill_a_cavy.description": "Kill a poor cavy(you monster)",
+  "entity.animalistic.caracal": "Caracal",
+  "entity.animalistic.mudpuppy": "Mudpuppy",
+  "entity.animalistic.cavy": "Cavy",
+  "item.animalistic.caracal_spawn_egg": "Caracal Spawn Egg",
+  "item.animalistic.wolverine_spawn_egg": "Wolverine Spawn Egg",
+  "item.animalistic.dumplings": "Dumplings",
+  "item.animalistic.mudpuppy_spawn_egg": "Mudpuppy Spawn Egg",
+  "item.animalistic.cavy_spawn_egg": "Cavy Spawn Egg",
+  "item.animalistic.mudpuppy_bucket": "Mudpuppy bucket"
+}

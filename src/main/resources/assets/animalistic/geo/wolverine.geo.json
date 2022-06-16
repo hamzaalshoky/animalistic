@@ -1,0 +1,70 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.wolverine",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "head",
+					"pivot": [0, 12, -7],
+					"cubes": [
+						{"origin": [-4.5, 6, -12], "size": [9, 6, 6], "uv": [0, 0]},
+						{"origin": [-1.5, 7, -14], "size": [3, 1, 2], "uv": [0, 12]},
+						{"origin": [-4.79052, 11.91087, -10.43235], "size": [4, 2, 0], "pivot": [-3, 11.75, -10.25], "rotation": [-30, 2.5, -7.5], "uv": [10, 12]},
+						{"origin": [0.79052, 11.91087, -10.43235], "size": [4, 2, 0], "pivot": [3, 11.75, -10.25], "rotation": [-30, -2.5, 7.5], "uv": [10, 14]}
+					]
+				},
+				{
+					"name": "jaw",
+					"parent": "head",
+					"pivot": [0, 12, -7],
+					"cubes": [
+						{"origin": [-1.5, 6, -14], "size": [3, 1, 2], "uv": [0, 13]}
+					]
+				},
+				{
+					"name": "torso",
+					"pivot": [0, 2, 0],
+					"cubes": [
+						{"origin": [-5.5, 5, -6.5], "size": [11, 9, 14], "pivot": [0, 4, 1], "rotation": [-2.5, 0, 0], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "leg_1",
+					"pivot": [6, 10, 6],
+					"cubes": [
+						{"origin": [2.16232, 0, 2.94092], "size": [7, 10, 7], "pivot": [6, 10, 6], "rotation": [0, -40, 0], "uv": [20, 39]}
+					]
+				},
+				{
+					"name": "leg_2",
+					"pivot": [-6, 10, 6],
+					"cubes": [
+						{"origin": [-9.04627, 0, 3.08371], "size": [7, 10, 7], "pivot": [-6, 10, 6], "rotation": [0, 40, 0], "uv": [20, 39]}
+					]
+				},
+				{
+					"name": "leg_3",
+					"pivot": [5, 7, -3],
+					"cubes": [
+						{"origin": [2, 0, -5], "size": [5, 7, 5], "pivot": [5, 7, -3], "rotation": [0, -15, 0], "uv": [0, 39]}
+					]
+				},
+				{
+					"name": "leg_4",
+					"pivot": [-2.1, 9, -3],
+					"cubes": [
+						{"origin": [-7, 0, -5.75], "size": [5, 7, 5], "pivot": [-2.1, 9, -3], "rotation": [0, 15, 0], "uv": [0, 39]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AEA"
+
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:wheat"
+    },
+    "E": {
+      "item": "minecraft:beef"
+    }
+  },
+  "result": {
+    "item": "animalistic:dumplings"
+  }
+}
