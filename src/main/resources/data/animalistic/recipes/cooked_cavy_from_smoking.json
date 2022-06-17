@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "animalistic:raw_cavy_meat"
+  },
+  "result": "animalistic:cooked_cavy_meat",
+  "experience": 0.35,
+  "cookingtime": 100
+}

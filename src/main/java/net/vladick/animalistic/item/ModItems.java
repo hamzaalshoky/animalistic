@@ -40,6 +40,12 @@ public class ModItems {
     public static final RegistryObject<Item> DUMPLINGS = ITEMS.register("dumplings",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.DUMPLINGS)));
 
+    public static final RegistryObject<Item> RAW_CAVY_MEAT = ITEMS.register("raw_cavy_meat",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.RAW_CAVY_MEAT)));
+
+    public static final RegistryObject<Item> COOKED_CAVY_MEAT = ITEMS.register("cooked_cavy_meat",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.COOKED_CAVY_MEAT)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
