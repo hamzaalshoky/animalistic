@@ -33,6 +33,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+
 import java.util.function.Predicate;
 
 public class WolverineEntity extends Animal implements IAnimatable{
@@ -43,15 +44,16 @@ public class WolverineEntity extends Animal implements IAnimatable{
         super(p_27557_, p_27558_);
     }
 
-    public boolean screaming;
+    public boolean screaming = false;
+    public int screamingCooldown = 100;
 
 
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 15.0D)
+                .add(Attributes.MAX_HEALTH, 13.0D)
                 .add(Attributes.ATTACK_DAMAGE, 8.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.2f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.23f).build();
     }
 
     protected void registerGoals() {
@@ -77,15 +79,15 @@ public class WolverineEntity extends Animal implements IAnimatable{
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.COD_AMBIENT;
+        return SoundEvents.POLAR_BEAR_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.SALMON_HURT;
+        return SoundEvents.WOLF_GROWL;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.SALMON_DEATH;
+        return SoundEvents.POLAR_BEAR_DEATH;
     }
 
     protected float getSoundVolume() {
@@ -104,8 +106,8 @@ public class WolverineEntity extends Animal implements IAnimatable{
             return PlayState.CONTINUE;
         }
 
-        if (this.screaming = true) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("scream", true));
+        if (screamingCooldown <= 1) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("roar", false));
             return PlayState.CONTINUE;
         }
 
@@ -131,23 +133,22 @@ public class WolverineEntity extends Animal implements IAnimatable{
     }
 
     public void Scream(){
-        this.playSound(SoundEvents.POLAR_BEAR_WARNING, 1.0F, 1);
-        this.getNavigation().stop();
-        screaming = true;
-    }
-
-    public class WolverineAlertableEntitiesSelector implements Predicate<LivingEntity>{
-        @Override
-        public boolean test(LivingEntity livingEntity) {
-                return true;
+        if (screamingCooldown <= 0) {
+            this.playSound(SoundEvents.POLAR_BEAR_WARNING, 1.0F, 1);
+            this.getNavigation().stop();
+            screamingCooldown = 100;
         }
     }
 
-    abstract class WolverineBehaviorGoal extends Goal {
-        private final TargetingConditions alertableTargeting = TargetingConditions.forCombat().range(12.0D).ignoreLineOfSight().selector(WolverineEntity.this.new WolverineAlertableEntitiesSelector());
+    public void tick() {
+        super.tick();
+        if(screamingCooldown > 0){
+            screamingCooldown--;
+        }
 
-        protected boolean alertable() {
-            return !WolverineEntity.this.level.getNearbyEntities(LivingEntity.class, this.alertableTargeting, WolverineEntity.this, WolverineEntity.this.getBoundingBox().inflate(12.0D, 6.0D, 12.0D)).isEmpty();
+        if (random.nextInt(800) == 0 && screamingCooldown <= 0) {
+            Scream();
+            screamingCooldown = 100;
         }
     }
 }
