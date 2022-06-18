@@ -53,7 +53,6 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     public MudpuppyEntity(EntityType<? extends Animal> p_27557_, Level p_27558_) {
         super(p_27557_, p_27558_);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.maxUpStep = 1.0F;
     }
 
 
@@ -134,36 +133,6 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
         return true;
     }
 
-    public void travel(Vec3 p_149181_) {
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(this.getSpeed(), p_149181_);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-        } else {
-            super.travel(p_149181_);
-        }
-
-    }
-
-    static class AxolotlPathNavigation extends WaterBoundPathNavigation {
-        AxolotlPathNavigation(Axolotl p_149218_, Level p_149219_) {
-            super(p_149218_, p_149219_);
-        }
-
-        protected boolean canUpdatePath() {
-            return true;
-        }
-
-        protected PathFinder createPathFinder(int p_149222_) {
-            this.nodeEvaluator = new AmphibiousNodeEvaluator(false);
-            return new PathFinder(this.nodeEvaluator, p_149222_);
-        }
-
-        public boolean isStableDestination(BlockPos p_149224_) {
-            return !this.level.getBlockState(p_149224_.below()).isAir();
-        }
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving() || this.isInWaterOrBubble()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("swim", true));
@@ -215,22 +184,5 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
     public SoundEvent getPickupSound() {
         return SoundEvents.BUCKET_FILL_FISH;
-    }
-
-    @Nullable
-    public ItemEntity spawnItemAtOffset(ItemStack stack, float f, float f1) {
-        if (stack.isEmpty()) {
-            return null;
-        } else if (this.level.isClientSide) {
-            return null;
-        } else {
-            Vec3 vec = new Vec3(0, 0, f).yRot(-f * ((float) Math.PI / 180F));
-            ItemEntity itementity = new ItemEntity(this.level, this.getX() + vec.x, this.getY() + (double) f1, this.getZ() + vec.z, stack);
-            itementity.setDefaultPickUpDelay();
-            if (captureDrops() != null) captureDrops().add(itementity);
-            else
-                this.level.addFreshEntity(itementity);
-            return itementity;
-        }
     }
 }
