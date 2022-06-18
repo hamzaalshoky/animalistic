@@ -10,10 +10,14 @@
       "item": "minecraft:wheat"
     },
     "E": {
-      "item": "minecraft:beef"
+      "item": "minecraft:beef",
+      "item": "minecraft:raw_beef",
+      "item": "minecraft:raw_mutton",
+      "item": "minecraft:raw_porkchop"
     }
   },
   "result": {
-    "item": "animalistic:dumplings"
+    "item": "animalistic:dumplings",
+    "count": 8
   }
 }

@@ -15,10 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.entity.custom.CaracalEntity;
-import net.vladick.animalistic.entity.custom.CavyEntity;
-import net.vladick.animalistic.entity.custom.MudpuppyEntity;
-import net.vladick.animalistic.entity.custom.WolverineEntity;
+import net.vladick.animalistic.entity.custom.*;
 import net.vladick.animalistic.item.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,6 +52,7 @@ public class Animalistic
         event.put(ModEntityTypes.CARACAL.get(), CaracalEntity.setAttributes());
         event.put(ModEntityTypes.CAVY.get(), CavyEntity.setAttributes());
         event.put(ModEntityTypes.WOLVERINE.get(), WolverineEntity.setAttributes());
+        event.put(ModEntityTypes.KRILL.get(), KrillEntity.setAttributes());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

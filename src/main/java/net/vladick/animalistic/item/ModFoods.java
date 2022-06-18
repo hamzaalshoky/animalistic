@@ -13,4 +13,13 @@ public class ModFoods {
 
     public static final FoodProperties COOKED_CAVY_MEAT = new FoodProperties.Builder().nutrition(4).saturationMod(0.4f).meat()
             .build();
+
+    public static final FoodProperties RAW_KRILL = new FoodProperties.Builder().nutrition(1).saturationMod(0.2f)
+            .meat().build();
+
+    public static final FoodProperties COOKED_KRILL = new FoodProperties.Builder().nutrition(5).saturationMod(0.5f).meat()
+            .build();
+
+    public static final FoodProperties KRILL_SANDWICH = new FoodProperties.Builder().nutrition(7).saturationMod(0.7f).meat()
+            .build();
 }

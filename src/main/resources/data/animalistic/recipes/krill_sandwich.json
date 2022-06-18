@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "E"
+
+  ],
+  "key": {
+    "A": {
+      "item": "animalistic:cooked_krill"
+    },
+    "E": {
+      "item": "minecraft:bread"
+    }
+  },
+  "result": {
+    "item": "animalistic:krill_sandwich",
+    "count": 2
+  }
+}

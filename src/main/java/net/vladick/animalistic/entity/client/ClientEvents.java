@@ -15,5 +15,6 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntityTypes.CARACAL.get(), CaracalRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.CAVY.get(), CavyRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.WOLVERINE.get(), WolverineRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.KRILL.get(), KrillRenderer::new);
     }
 }

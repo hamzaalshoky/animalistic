@@ -26,15 +26,23 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> WOLVERINE_SPAWN_EGG = ITEMS.register("wolverine_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.WOLVERINE,10381639, 9064254,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.WOLVERINE,7690567, 4274744,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> CAVY_SPAWN_EGG = ITEMS.register("cavy_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.CAVY,16235412, 15180944,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
+    public static final RegistryObject<Item> KRILL_SPAWN_EGG = ITEMS.register("krill_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.KRILL,14932690, 15704185,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
             () -> new MobBucketItem(ModEntityTypes.MUDPUPPY, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
+                    (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> KRILL_BUCKET = ITEMS.register("krill_bucket",
+            () -> new MobBucketItem(ModEntityTypes.KRILL, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> DUMPLINGS = ITEMS.register("dumplings",
@@ -45,6 +53,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> COOKED_CAVY_MEAT = ITEMS.register("cooked_cavy_meat",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.COOKED_CAVY_MEAT)));
+
+    public static final RegistryObject<Item> RAW_KRILL = ITEMS.register("raw_krill",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.RAW_KRILL)));
+
+    public static final RegistryObject<Item> COOKED_KRILL = ITEMS.register("cooked_krill",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.COOKED_KRILL)));
+
+    public static final RegistryObject<Item> KRILL_SANDWICH = ITEMS.register("krill_sandwich",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.KRILL_SANDWICH)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
