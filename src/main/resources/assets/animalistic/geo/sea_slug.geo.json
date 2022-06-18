@@ -1,0 +1,48 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.giant_sea_slug",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "eyes_left",
+					"parent": "bone",
+					"pivot": [5, 11, 7],
+					"cubes": [
+						{"origin": [3, 11, -7], "size": [3, 10, 0], "pivot": [5, 11, -7], "rotation": [32.5, -10, 5], "uv": [6, 27]},
+						{"origin": [2, 2, -10], "size": [4, 8, 4], "pivot": [5, 3, -8], "rotation": [97.5, -7.5, -2.5], "uv": [12, 27]}
+					]
+				},
+				{
+					"name": "eyes_right",
+					"parent": "bone",
+					"pivot": [-5, 11, 7],
+					"cubes": [
+						{"origin": [-6, 11, -7], "size": [3, 10, 0], "pivot": [-5, 11, -7], "rotation": [32.5, 10, -5], "uv": [0, 27]},
+						{"origin": [-6, 2, -10], "size": [4, 8, 4], "pivot": [-5, 3, -8], "rotation": [97.5, 7.5, 2.5], "uv": [12, 27]}
+					]
+				},
+				{
+					"name": "torso",
+					"parent": "bone",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-6, 0, -8], "size": [12, 11, 16], "uv": [0, 0]},
+						{"origin": [-6, 0, 8], "size": [12, 0, 11], "uv": [-11, 37]}
+					]
+				}
+			]
+		}
+	]
+}

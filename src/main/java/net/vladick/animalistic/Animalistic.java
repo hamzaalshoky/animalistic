@@ -53,6 +53,7 @@ public class Animalistic
         event.put(ModEntityTypes.CAVY.get(), CavyEntity.setAttributes());
         event.put(ModEntityTypes.WOLVERINE.get(), WolverineEntity.setAttributes());
         event.put(ModEntityTypes.KRILL.get(), KrillEntity.setAttributes());
+        event.put(ModEntityTypes.SEA_SLUG.get(), SeaSlugEntity.setAttributes());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

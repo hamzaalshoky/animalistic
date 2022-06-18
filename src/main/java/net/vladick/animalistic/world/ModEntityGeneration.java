@@ -83,6 +83,18 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
         }
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_LUKEWARM_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_COLD_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        }
     }
 
     public static boolean doesBiomeMatch(ResourceLocation biomeNameIn, ResourceKey<Biome> biomeIn) {

@@ -50,6 +50,33 @@ public class EntityEvents {
             }
 
             entity.discard();
+        }else if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive()) {
+            ItemStack bucket = ItemStack.EMPTY;
+            if (entity.getType() == ModEntityTypes.KRILL.get()) {
+                bucket = new ItemStack(ModItems.KRILL_BUCKET.get());
+            } else {
+                return;
+            }
+
+            player.swing(event.getHand());
+            entity.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
+            stack.shrink(1);
+
+            if (entity.hasCustomName()) {
+                bucket.setHoverName(entity.getCustomName());
+            }
+
+            if (!event.getWorld().isClientSide) {
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
+            }
+
+            if (stack.isEmpty()) {
+                player.setItemInHand(event.getHand(), bucket);
+            } else if (!player.getInventory().add(bucket)) {
+                player.drop(bucket, false);
+            }
+
+            entity.discard();
         }
     }
 

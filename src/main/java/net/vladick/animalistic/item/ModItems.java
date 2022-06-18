@@ -37,6 +37,10 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.KRILL,14932690, 15704185,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
+    public static final RegistryObject<Item> SEA_SLUG_SPAWN_EGG = ITEMS.register("sea_slug_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.SEA_SLUG,5396062, 3618884,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
             () -> new MobBucketItem(ModEntityTypes.MUDPUPPY, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
@@ -62,6 +66,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> KRILL_SANDWICH = ITEMS.register("krill_sandwich",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.KRILL_SANDWICH)));
+
+    public static final RegistryObject<Item> SEA_SLUG_SLIME = ITEMS.register("sea_slug_slime",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

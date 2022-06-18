@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "animalistic:block/sea_slug_slime_block"
+  }
+}

@@ -39,6 +39,11 @@ public class ModEntityTypes {
                     .sized(0.9f, 1.5f)
                     .build(new ResourceLocation(Animalistic.MOD_ID, "krill").toString()));
 
+    public static final RegistryObject<EntityType<SeaSlugEntity>> SEA_SLUG = ENTITY_TYPES.register("sea_slug",
+            () -> EntityType.Builder.of(SeaSlugEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "krill").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
