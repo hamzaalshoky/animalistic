@@ -92,6 +92,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Cod.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, TropicalFish.class, 5, true, true, (Predicate<LivingEntity>)null));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, KrillEntity.class, 5, true, true, (Predicate<LivingEntity>)null));
     }
 
     @Nullable

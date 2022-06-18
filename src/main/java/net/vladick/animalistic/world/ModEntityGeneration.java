@@ -68,6 +68,21 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.FROZEN_PEAKS)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.WOLVERINE.get(), 6, 1, 3));
         }
+        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.WARM_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.LUKEWARM_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_LUKEWARM_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        }
     }
 
     public static boolean doesBiomeMatch(ResourceLocation biomeNameIn, ResourceKey<Biome> biomeIn) {
