@@ -22,8 +22,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SEA_SLUG_SLIME_BLOCK = registerBlock("sea_slug_slime_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
-                    .strength(5f)), ModCreativeModeTabs.ANIMALISTIC_TAB);
-
+                    .strength(2f)), ModCreativeModeTabs.ANIMALISTIC_TAB);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {

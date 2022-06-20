@@ -13,15 +13,18 @@
   "entity.animalistic.sea_slug": "Sea Slug",
   "item.animalistic.caracal_spawn_egg": "Caracal Spawn Egg",
   "item.animalistic.wolverine_spawn_egg": "Wolverine Spawn Egg",
+  "item.animalistic.sea_slug_spawn_egg": "Sea Slug Spawn Egg",
   "item.animalistic.krill_spawn_egg": "Krill Spawn Egg",
   "item.animalistic.raw_cavy_meat": "Raw Cavy Meat",
   "item.animalistic.cooked_cavy_meat": "Cooked Cavy Meat",
   "item.animalistic.raw_krill": "Raw Krill",
+  "item.animalistic.krill_sandwich": "Krill Sandwich",
   "item.animalistic.cooked_krill": "Cooked Krill",
   "item.animalistic.sea_slug_slime": "Sea Slug Slime",
   "item.animalistic.dumplings": "Dumplings",
   "item.animalistic.mudpuppy_spawn_egg": "Mudpuppy Spawn Egg",
   "item.animalistic.cavy_spawn_egg": "Cavy Spawn Egg",
   "item.animalistic.mudpuppy_bucket": "Mudpuppy bucket",
+  "item.animalistic.krill_bucket": "Krill bucket",
   "block.animalistic.sea_slug_slime_block": "Sea Slug Slime Block"
 }

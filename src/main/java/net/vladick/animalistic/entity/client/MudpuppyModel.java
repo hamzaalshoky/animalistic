@@ -14,7 +14,7 @@ public class MudpuppyModel extends AnimatedGeoModel<MudpuppyEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(MudpuppyEntity object) {
-        return new ResourceLocation(Animalistic.MOD_ID, "textures/entity/mudpuppy/mudpuppy.png");
+        return MudpuppyRenderer.LOCATION_BY_VARIANT.get(object.getVariant());
     }
 
     @Override

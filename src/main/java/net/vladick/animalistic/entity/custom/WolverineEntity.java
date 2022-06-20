@@ -69,6 +69,7 @@ public class WolverineEntity extends Animal implements IAnimatable{
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PolarBear.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Monster.class, 5, true, true, (Predicate<LivingEntity>)null));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SeaSlugEntity.class, 5, true, true, (Predicate<LivingEntity>)null));
 
     }
 

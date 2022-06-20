@@ -3,7 +3,9 @@ package net.vladick.animalistic.event;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -11,6 +13,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vladick.animalistic.Animalistic;
+import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityTypes;
 import net.vladick.animalistic.entity.custom.CaracalEntity;
 import net.vladick.animalistic.item.ModItems;
@@ -20,7 +23,7 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onInteractEntity(PlayerInteractEvent.EntityInteract event) {
-        Entity entity = event.getTarget();
+        LivingEntity entity = (LivingEntity) event.getTarget();
         Player player = event.getPlayer();
         ItemStack stack = event.getItemStack();
         if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive()) {

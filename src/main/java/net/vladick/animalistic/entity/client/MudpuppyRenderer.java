@@ -1,16 +1,28 @@
 package net.vladick.animalistic.entity.client;
 
+import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.vladick.animalistic.Animalistic;
 import net.vladick.animalistic.entity.custom.MudpuppyEntity;
+import net.vladick.animalistic.entity.variant.MudpuppyVariant;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
+import java.util.Map;
+
 public class MudpuppyRenderer extends GeoEntityRenderer<MudpuppyEntity> {
+    public static final Map<MudpuppyVariant, ResourceLocation> LOCATION_BY_VARIANT =
+            Util.make(Maps.newEnumMap(MudpuppyVariant.class), (p_114874_) -> {
+                p_114874_.put(MudpuppyVariant.NORMAL,
+                        new ResourceLocation(Animalistic.MOD_ID, "textures/entity/mudpuppy/mudpuppy.png"));
+                p_114874_.put(MudpuppyVariant.GOLDEN,
+                        new ResourceLocation(Animalistic.MOD_ID, "textures/entity/mudpuppy/mudpuppy_golden.png"));
+            });
 
     public MudpuppyRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new MudpuppyModel());
@@ -19,7 +31,7 @@ public class MudpuppyRenderer extends GeoEntityRenderer<MudpuppyEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(MudpuppyEntity instance) {
-        return new ResourceLocation(Animalistic.MOD_ID, "textures/entity/mudpuppy/mudpuppy.png");
+        return LOCATION_BY_VARIANT.get(instance.getVariant());
     }
 
 

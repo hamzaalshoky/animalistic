@@ -2,18 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
-    "#B#",
+    "###",
     "###"
   ],
   "key": {
     "#": {
-      "item": "minecraft:wheat"
-    },
-    "B": {
-      "item": "minecraft:beef"
+      "item": "animalistic:sea_slug_slime"
     }
   },
   "result": {
-    "item": "animalistic:dumplings"
+    "item": "animalistic:sea_slug_slime_block"
   }
 }

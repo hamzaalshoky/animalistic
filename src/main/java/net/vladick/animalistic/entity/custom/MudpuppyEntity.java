@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,19 +22,21 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.variant.MudpuppyVariant;
+import net.vladick.animalistic.entity.variant.MudpuppyVariant;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -44,9 +47,15 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 import java.util.function.Predicate;
 
 public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
+
+    private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
+            SynchedEntityData.defineId(MudpuppyEntity.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(MudpuppyEntity.class, EntityDataSerializers.BOOLEAN);
 
     private AnimationFactory factory = new AnimationFactory(this);
 
@@ -96,8 +105,21 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     @Nullable
-    public MudpuppyEntity getBreedOffspring(ServerLevel serverLevel, AgeableMob p_146744_) {
-        return ModEntityTypes.MUDPUPPY.get().create(serverLevel);
+    public AgeableMob getBreedOffspring(ServerLevel p_149112_, AgeableMob p_149113_) {
+        MudpuppyEntity mudpuppy = ModEntityTypes.MUDPUPPY.get().create(p_149112_);
+        if (mudpuppy != null) {
+            MudpuppyVariant mudpuppy$variant;
+            if (useRareVariant(this.random)) {
+                mudpuppy$variant = MudpuppyVariant.getRareSpawnVariant(this.random);
+            } else {
+                mudpuppy$variant = this.random.nextBoolean() ? this.getVariant() : ((MudpuppyEntity)p_149113_).getVariant();
+            }
+
+            mudpuppy.setVariant(mudpuppy$variant);
+            mudpuppy.setPersistenceRequired();
+        }
+
+        return mudpuppy;
     }
 
     public boolean isFood(ItemStack pStack) {
@@ -105,6 +127,53 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     // ANIMATIONS //
+
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_149132_, DifficultyInstance p_149133_, MobSpawnType p_149134_, @Nullable SpawnGroupData p_149135_, @Nullable CompoundTag p_149136_) {
+        boolean flag = false;
+        if (p_149134_ == MobSpawnType.BUCKET) {
+            return p_149135_;
+        } else {
+            if (p_149135_ instanceof MudpuppyEntity.MudpuppyGroupData) {
+                if (((MudpuppyEntity.MudpuppyGroupData)p_149135_).getGroupSize() >= 2) {
+                    flag = true;
+                }
+            } else {
+                p_149135_ = new MudpuppyEntity.MudpuppyGroupData(MudpuppyVariant.getCommonSpawnVariant(this.level.random), MudpuppyVariant.getCommonSpawnVariant(this.level.random));
+            }
+
+            this.setVariant(((MudpuppyEntity.MudpuppyGroupData)p_149135_).getVariant(this.level.random));
+            if (flag) {
+                this.setAge(-24000);
+            }
+
+            return super.finalizeSpawn(p_149132_, p_149133_, p_149134_, p_149135_, p_149136_);
+        }
+    }
+
+    public static class MudpuppyGroupData extends AgeableMob.AgeableMobGroupData {
+        public final MudpuppyVariant[] types;
+
+        public MudpuppyGroupData(MudpuppyVariant... p_149204_) {
+            super(false);
+            this.types = p_149204_;
+        }
+
+        public MudpuppyVariant getVariant(Random p_149206_) {
+            return this.types[p_149206_.nextInt(this.types.length)];
+        }
+    }
+
+    public MudpuppyVariant getVariant() {
+        return MudpuppyVariant.byId(this.entityData.get(DATA_ID_TYPE_VARIANT));
+    }
+
+    private void setVariant(MudpuppyVariant p_149118_) {
+        this.entityData.set(DATA_ID_TYPE_VARIANT, p_149118_.getId());
+    }
+
+    private static boolean useRareVariant(Random p_149143_) {
+        return p_149143_.nextInt(10) == 0;
+    }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
         this.playSound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, 0.15F, 1.0F);
@@ -134,6 +203,25 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
         return true;
     }
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+        this.entityData.define(FROM_BUCKET, false);
+
+    }
+
+    public void addAdditionalSaveData(CompoundTag p_149158_) {
+        super.addAdditionalSaveData(p_149158_);
+        p_149158_.putInt("Variant", this.getVariant().getId());
+        p_149158_.putBoolean("FromBucket", this.fromBucket());
+    }
+
+    public void readAdditionalSaveData(CompoundTag p_149145_) {
+        super.readAdditionalSaveData(p_149145_);
+        this.entityData.set(DATA_ID_TYPE_VARIANT, p_149145_.getInt("Variant"));
+        this.setFromBucket(p_149145_.getBoolean("FromBucket"));
+    }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving() || this.isInWaterOrBubble()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("swim", true));
@@ -161,11 +249,11 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     public boolean fromBucket() {
-        return false;
+        return this.entityData.get(FROM_BUCKET);
     }
 
-    public void setFromBucket(boolean p_148834_) {
-
+    public void setFromBucket(boolean p_149196_) {
+        this.entityData.set(FROM_BUCKET, p_149196_);
     }
 
     public void saveToBucketTag(ItemStack stack) {

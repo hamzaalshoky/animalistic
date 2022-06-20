@@ -14,6 +14,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.vladick.animalistic.block.ModBlocks;
+import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityTypes;
 import net.vladick.animalistic.entity.custom.*;
 import net.vladick.animalistic.item.ModItems;
@@ -44,6 +46,8 @@ public class Animalistic
 
 
         ModItems.register(eventBus);
+        ModBlocks.register(eventBus);
+        ModEffects.register(eventBus);
         ModEntityTypes.register(eventBus);
     }
 

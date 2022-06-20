@@ -3,10 +3,15 @@ package net.vladick.animalistic.entity.custom;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,6 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -103,5 +109,24 @@ public class SeaSlugEntity extends WaterAnimal implements IAnimatable{
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    private void touch(Mob p_29606_) {
+        if (p_29606_.hurt(DamageSource.mobAttack(this), 1)) {
+            p_29606_.addEffect(new MobEffectInstance(ModEffects.STICKY_TOXIN.get(), 60, 0), this);
+            this.playSound(SoundEvents.SLIME_ATTACK, 1.0F, 1.0F);
+        }
+
+    }
+
+    public void playerTouch(Player p_29617_) {
+        if (p_29617_ instanceof ServerPlayer && p_29617_.hurt(DamageSource.mobAttack(this), (float)(1))) {
+            if (!this.isSilent()) {
+                ((ServerPlayer)p_29617_).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0F));
+            }
+
+            p_29617_.addEffect(new MobEffectInstance(ModEffects.STICKY_TOXIN.get(), 60, 0), this);
+        }
+
     }
 }
