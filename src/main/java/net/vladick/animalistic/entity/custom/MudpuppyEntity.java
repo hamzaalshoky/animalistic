@@ -172,7 +172,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     private static boolean useRareVariant(Random p_149143_) {
-        return p_149143_.nextInt(10) == 0;
+        return p_149143_.nextInt(100) == 0;
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
