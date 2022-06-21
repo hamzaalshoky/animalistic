@@ -26,5 +26,6 @@
   "item.animalistic.cavy_spawn_egg": "Cavy Spawn Egg",
   "item.animalistic.mudpuppy_bucket": "Mudpuppy bucket",
   "item.animalistic.krill_bucket": "Krill bucket",
-  "block.animalistic.sea_slug_slime_block": "Sea Slug Slime Block"
+  "block.animalistic.sea_slug_slime_block": "Sea Slug Slime Block",
+  "itemGroup.animalistic_tab": "Animalistic Tab"
 }
