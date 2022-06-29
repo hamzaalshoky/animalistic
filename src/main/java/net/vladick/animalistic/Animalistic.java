@@ -1,8 +1,11 @@
 package net.vladick.animalistic;
 
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,8 +22,11 @@ import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityTypes;
 import net.vladick.animalistic.entity.custom.*;
 import net.vladick.animalistic.item.ModItems;
+import net.vladick.animalistic.potion.ModPotions;
+import net.vladick.animalistic.util.BetterBrewingRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -44,20 +50,21 @@ public class Animalistic
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        GeckoLib.initialize();
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
         ModEffects.register(eventBus);
         ModEntityTypes.register(eventBus);
+        ModPotions.register(eventBus);
     }
 
-    private void setup(EntityAttributeCreationEvent event) {
-        event.put(ModEntityTypes.MUDPUPPY.get(), MudpuppyEntity.setAttributes());
-        event.put(ModEntityTypes.CARACAL.get(), CaracalEntity.setAttributes());
-        event.put(ModEntityTypes.CAVY.get(), CavyEntity.setAttributes());
-        event.put(ModEntityTypes.WOLVERINE.get(), WolverineEntity.setAttributes());
-        event.put(ModEntityTypes.KRILL.get(), KrillEntity.setAttributes());
-        event.put(ModEntityTypes.SEA_SLUG.get(), SeaSlugEntity.setAttributes());
+    private void setup(final FMLCommonSetupEvent event) {
+        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.EMPTY,
+                ModItems.ROACH_ANTENNA.get(), Potions.AWKWARD));
+
+        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,
+                ModItems.ROACH_ANTENNA.get(), ModPotions.HURLING_POTION.get()));
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

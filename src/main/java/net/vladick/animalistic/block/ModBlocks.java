@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vladick.animalistic.Animalistic;
+import net.vladick.animalistic.block.custom.SeaSlugSlimeBLock;
 import net.vladick.animalistic.item.ModCreativeModeTabs;
 import net.vladick.animalistic.item.ModItems;
 
@@ -21,7 +22,7 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, Animalistic.MOD_ID);
 
     public static final RegistryObject<Block> SEA_SLUG_SLIME_BLOCK = registerBlock("sea_slug_slime_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
+            () -> new SeaSlugSlimeBLock(BlockBehaviour.Properties.of(Material.CLAY)
                     .strength(2f)), ModCreativeModeTabs.ANIMALISTIC_TAB);
 
 

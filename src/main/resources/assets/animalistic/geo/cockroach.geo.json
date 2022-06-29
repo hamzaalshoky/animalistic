@@ -1,0 +1,56 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.cockroach",
+				"texture_width": 64,
+				"texture_height": 32,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "cocker",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "torso",
+					"parent": "cocker",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-3, 0, -5], "size": [6, 3, 10], "uv": [0, 13]},
+						{"origin": [-3.5, 1.25, -5.25], "size": [7, 2, 11], "pivot": [0, 3, 0], "rotation": [2.5, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "cocker",
+					"pivot": [0, 0, -5],
+					"cubes": [
+						{"origin": [-2, 0, -7], "size": [4, 3, 2], "uv": [0, 26]},
+						{"origin": [-1.5, 2.00369, -13.6121], "size": [0, 18, 8], "pivot": [-1.5, 3, -6], "rotation": [10, 5, -2.5], "uv": [32, 5]},
+						{"origin": [1.5, 2.00369, -13.6121], "size": [0, 18, 8], "pivot": [1.5, 3, -6], "rotation": [10, -5, 2.5], "uv": [32, 5]}
+					]
+				},
+				{
+					"name": "legs_right",
+					"parent": "cocker",
+					"pivot": [-3, 0.25, 0],
+					"cubes": [
+						{"origin": [-10, 0.25, -7], "size": [9, 0, 14], "pivot": [-3, 0.25, 0], "rotation": [0, 0, -2.5], "uv": [32, 16]}
+					]
+				},
+				{
+					"name": "legs_left",
+					"parent": "cocker",
+					"pivot": [3, 0.25, 0],
+					"cubes": [
+						{"origin": [-1, 0.25, -7], "size": [9, 0, 14], "pivot": [3, 0.25, 0], "rotation": [0, 0, 2.5], "uv": [32, 0]}
+					]
+				}
+			]
+		}
+	]
+}

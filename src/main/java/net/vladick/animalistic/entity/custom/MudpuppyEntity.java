@@ -34,6 +34,7 @@ import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.vladick.animalistic.entity.ModEntityTypes;
 import net.vladick.animalistic.entity.variant.MudpuppyVariant;
 import net.vladick.animalistic.entity.variant.MudpuppyVariant;
@@ -123,7 +124,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     public boolean isFood(ItemStack pStack) {
-        return pStack.getItem() == Items.COD;
+        return pStack.getItem() == Items.COD || pStack.getItem() == ModItems.RAW_KRILL.get();
     }
 
     // ANIMATIONS //
@@ -180,15 +181,15 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.COD_AMBIENT;
+        return SoundEvents.AXOLOTL_IDLE_WATER;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.SALMON_HURT;
+        return SoundEvents.AXOLOTL_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.SALMON_DEATH;
+        return SoundEvents.AXOLOTL_DEATH;
     }
 
     protected float getSoundVolume() {

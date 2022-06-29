@@ -17,5 +17,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntityTypes.WOLVERINE.get(), WolverineRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.KRILL.get(), KrillRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SEA_SLUG.get(), SeaSlugRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.COCKROACH.get(), CockroachRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.TURKEY.get(), TurkeyRenderer::new);
     }
 }

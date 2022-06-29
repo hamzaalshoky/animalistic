@@ -44,6 +44,16 @@ public class ModEntityTypes {
                     .sized(0.9f, 1.5f)
                     .build(new ResourceLocation(Animalistic.MOD_ID, "krill").toString()));
 
+    public static final RegistryObject<EntityType<CockroachEntity>> COCKROACH = ENTITY_TYPES.register("cockroach",
+            () -> EntityType.Builder.of(CockroachEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "cockroach").toString()));
+
+    public static final RegistryObject<EntityType<TurkeyEntity>> TURKEY = ENTITY_TYPES.register("turkey",
+            () -> EntityType.Builder.of(TurkeyEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "turkey").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

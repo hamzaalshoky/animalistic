@@ -50,8 +50,8 @@ public class WolverineEntity extends Animal implements IAnimatable{
 
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 13.0D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0f)
+                .add(Attributes.MAX_HEALTH, 18.0D)
+                .add(Attributes.ATTACK_DAMAGE, 7.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.23f).build();
     }
@@ -147,9 +147,19 @@ public class WolverineEntity extends Animal implements IAnimatable{
             screamingCooldown--;
         }
 
-        if (random.nextInt(800) == 0 && screamingCooldown <= 0) {
+        if (screamingCooldown <= 0) {
             Scream();
             screamingCooldown = 100;
         }
+    }
+
+    public boolean isMarvelWolverine() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && (s.toLowerCase().contains("marvel") && s.toLowerCase().contains("wolverine") || s.toLowerCase().equals("marvel"));
+    }
+
+    public boolean isLogan() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && (s.toLowerCase().contains("logan") || s.toLowerCase().equals("RIPlogan"));
     }
 }

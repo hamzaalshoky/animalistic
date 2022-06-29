@@ -41,7 +41,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CavyEntity extends TamableAnimal implements IAnimatable{
+import java.util.UUID;
+
+public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob{
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.INT);
@@ -58,8 +60,8 @@ public class CavyEntity extends TamableAnimal implements IAnimatable{
 
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 5.0D)
-                .add(Attributes.ATTACK_DAMAGE, 1.0f)
+                .add(Attributes.MAX_HEALTH, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.2f).build();
     }
@@ -80,7 +82,7 @@ public class CavyEntity extends TamableAnimal implements IAnimatable{
     // ANIMATIONS //
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.CAKE_ADD_CANDLE, 0.15F, 1.0F);
+        this.playSound(SoundEvents.RABBIT_JUMP, 0.15F, 1.0F);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -257,4 +259,29 @@ public class CavyEntity extends TamableAnimal implements IAnimatable{
         return false;
     }
 
+    @Override
+    public int getRemainingPersistentAngerTime() {
+        return 0;
+    }
+
+    @Override
+    public void setRemainingPersistentAngerTime(int p_21673_) {
+
+    }
+
+    @Nullable
+    @Override
+    public UUID getPersistentAngerTarget() {
+        return null;
+    }
+
+    @Override
+    public void setPersistentAngerTarget(@Nullable UUID p_21672_) {
+
+    }
+
+    @Override
+    public void startPersistentAngerTimer() {
+
+    }
 }

@@ -62,7 +62,7 @@ public class CaracalEntity extends Animal implements IAnimatable{
 
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0D)
+                .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.3f)
@@ -79,6 +79,7 @@ public class CaracalEntity extends Animal implements IAnimatable{
         this.targetSelector.addGoal(6, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Chicken.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Rabbit.class, 5, true, true, (Predicate<LivingEntity>)null));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, TurkeyEntity.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
     }
 
@@ -89,15 +90,15 @@ public class CaracalEntity extends Animal implements IAnimatable{
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.COD_AMBIENT;
+        return SoundEvents.CAT_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.SALMON_HURT;
+        return SoundEvents.WOLF_GROWL;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.SALMON_DEATH;
+        return SoundEvents.WOLF_DEATH;
     }
 
     protected float getSoundVolume() {

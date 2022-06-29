@@ -11,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -65,19 +66,19 @@ public class SeaSlugEntity extends WaterAnimal implements IAnimatable{
     // ANIMATIONS //
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.CAKE_ADD_CANDLE, 0.15F, 1.0F);
+        this.playSound(SoundEvents.SLIME_BLOCK_STEP, 0.15F, 1.0F);
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.RABBIT_AMBIENT;
+        return SoundEvents.SLIME_SQUISH;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.RABBIT_HURT;
+        return SoundEvents.SLIME_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RABBIT_DEATH;
+        return SoundEvents.SLIME_DEATH;
     }
 
     protected float getSoundVolume() {
@@ -119,14 +120,13 @@ public class SeaSlugEntity extends WaterAnimal implements IAnimatable{
 
     }
 
-    public void playerTouch(Player p_29617_) {
-        if (p_29617_ instanceof ServerPlayer && p_29617_.hurt(DamageSource.mobAttack(this), (float)(1))) {
-            if (!this.isSilent()) {
-                ((ServerPlayer)p_29617_).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0F));
-            }
+    public void playerTouch(LivingEntity p_29617_) {
+        if (p_29617_ instanceof LivingEntity && p_29617_.hurt(DamageSource.mobAttack(this), (float)(1))) {
 
             p_29617_.addEffect(new MobEffectInstance(ModEffects.STICKY_TOXIN.get(), 60, 0), this);
         }
 
     }
+
+
 }

@@ -12,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vladick.animalistic.Animalistic;
 import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.item.custom.TurkeyEgg;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -39,6 +40,14 @@ public class ModItems {
 
     public static final RegistryObject<Item> SEA_SLUG_SPAWN_EGG = ITEMS.register("sea_slug_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.SEA_SLUG,5396062, 3618884,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> COCKROACH_SPAWN_EGG = ITEMS.register("cockroach_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.COCKROACH,5396062, 3618884,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> TURKEY_SPAWN_EGG = ITEMS.register("turkey_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.TURKEY,5396062, 3618884,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
@@ -69,6 +78,12 @@ public class ModItems {
 
     public static final RegistryObject<Item> SEA_SLUG_SLIME = ITEMS.register("sea_slug_slime",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> ROACH_ANTENNA = ITEMS.register("roach_antenna",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> TURKEY_EGG = ITEMS.register("turkey_egg",
+            () -> new TurkeyEgg(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

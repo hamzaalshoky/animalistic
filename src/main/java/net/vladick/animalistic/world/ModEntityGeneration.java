@@ -11,19 +11,11 @@ import net.vladick.animalistic.entity.ModEntityTypes;
 
 public class ModEntityGeneration {
     public static void onEntitySpawn(final BiomeLoadingEvent event) {
-        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.MUDPUPPY.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.WARM_OCEAN)) {
+
+        if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.MUDPUPPY.get(), 6, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.LUKEWARM_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.MUDPUPPY.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.DEEP_LUKEWARM_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.MUDPUPPY.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.MUDPUPPY.get(), 6, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.SAVANNA)) {
@@ -38,13 +30,10 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.SAVANNA)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.CARACAL.get(), 6, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.SNOWY_SLOPES)) {
+        if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_GRAVELLY_HILLS)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.CAVY.get(), 6, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_HILLS)) {
-            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.CAVY.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.FROZEN_PEAKS)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.CAVY.get(), 6, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.JAGGED_PEAKS)) {
@@ -68,32 +57,38 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.FROZEN_PEAKS)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.WOLVERINE.get(), 6, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        if(doesBiomeMatch(event.getName(), Biomes.COLD_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 1));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.WARM_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.LUKEWARM_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
-        }
-        if(doesBiomeMatch(event.getName(), Biomes.DEEP_LUKEWARM_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_FROZEN_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 1));
         }
         if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 6, 1, 3));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 5, 3, 1));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.DEEP_LUKEWARM_OCEAN)) {
+        if(doesBiomeMatch(event.getName(), Biomes.STONY_SHORE)) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.DEEP_COLD_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        if(doesBiomeMatch(event.getName(), Biomes.LUSH_CAVES)) {
+            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.COCKROACH.get(), 6, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.DEEP_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        if(doesBiomeMatch(event.getName(), Biomes.PLAINS)) {
+            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.COCKROACH.get(), 6, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.COCKROACH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.FOREST)) {
+            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.COCKROACH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.SAVANNA)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.TURKEY.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.SAVANNA_PLATEAU)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.TURKEY.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_SAVANNA)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.TURKEY.get(), 6, 1, 3));
         }
     }
 

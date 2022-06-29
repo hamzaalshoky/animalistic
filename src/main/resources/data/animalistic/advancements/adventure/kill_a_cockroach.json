@@ -3,24 +3,25 @@
 
   "display": {
     "icon": {
-      "item": "animalistic:raw_cavy_meat",
+      "item": "minecraft:dirt",
+      "nbt": "{Damage:0}"
     },
     "title": {
-      "translate": "advancements.adventure.kill_a_cavy.title"
+      "translate": "advancements.adventure.kill_a_cockroach.title"
     },
     "description": {
-      "translate": "advancements.adventure.kill_a_cavy.description"
+      "translate": "advancements.adventure.kill_a_cockroach.description"
     }
   },
   "criteria": {
-    "animalistic:cavy": {
+    "animalistic:cockroach": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "predicate": {
-              "type": "animalistic:cavy"
+              "type": "animalistic:cockroach"
             },
             "entity": "this"
           }
@@ -30,7 +31,7 @@
   },
   "requirements": [
     [
-      "animalistic:cavy"
+      "animalistic:cockroach"
     ]
   ]
 }

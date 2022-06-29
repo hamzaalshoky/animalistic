@@ -83,7 +83,7 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.RABBIT_AMBIENT;
+        return SoundEvents.COD_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
@@ -91,7 +91,7 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RABBIT_DEATH;
+        return SoundEvents.SALMON_DEATH;
     }
 
     protected float getSoundVolume() {

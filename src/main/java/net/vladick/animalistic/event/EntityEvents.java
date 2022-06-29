@@ -1,15 +1,20 @@
 package net.vladick.animalistic.event;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vladick.animalistic.Animalistic;
@@ -17,6 +22,8 @@ import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityTypes;
 import net.vladick.animalistic.entity.custom.CaracalEntity;
 import net.vladick.animalistic.item.ModItems;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Animalistic.MOD_ID)
 public class EntityEvents {
@@ -80,6 +87,20 @@ public class EntityEvents {
             }
 
             entity.discard();
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void addCustomTrades(VillagerTradesEvent event) {
+        if(event.getType() == VillagerProfession.FISHERMAN) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            ItemStack stack = new ItemStack(ModItems.RAW_KRILL.get(), 3);
+            int villagerLevel = 1;
+
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 2),
+                    stack,10,3,0.02F));
         }
     }
 

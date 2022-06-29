@@ -11,6 +11,8 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class WolverineRenderer extends GeoEntityRenderer<WolverineEntity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("animalistic:textures/entity/wolverine/wolverine.png");
+    private static final ResourceLocation MARVEL_WOLVERINE = new ResourceLocation("animalistic:textures/entity/wolverine/wolverine_marvel.png");
+    private static final ResourceLocation LOGAN_WOLVERINE = new ResourceLocation("animalistic:textures/entity/wolverine/wolverine_logan.png");
 
     public WolverineRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new WolverineModel());
@@ -19,7 +21,7 @@ public class WolverineRenderer extends GeoEntityRenderer<WolverineEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(WolverineEntity instance) {
-        return TEXTURE;
+        return instance.isMarvelWolverine() ? MARVEL_WOLVERINE : instance.isLogan() ? LOGAN_WOLVERINE : TEXTURE;
     }
 
 
