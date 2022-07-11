@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "animalistic:roach_on_a_stick"
+  },
+  "result": "animalistic:cooked_roach_on_a_stick",
+  "experience": 0.35,
+  "cookingtime": 600
+}

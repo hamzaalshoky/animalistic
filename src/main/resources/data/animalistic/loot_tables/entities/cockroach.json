@@ -19,6 +19,22 @@
               "chance": 0.2
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalistic:deceased_roach",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.5
+            }
+          ]
         }
       ]
     }

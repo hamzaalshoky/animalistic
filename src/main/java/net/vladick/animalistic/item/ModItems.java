@@ -1,9 +1,7 @@
 package net.vladick.animalistic.item;
 
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,7 +10,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vladick.animalistic.Animalistic;
 import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.item.custom.TurkeyEgg;
+import net.vladick.animalistic.item.custom.HairAlgaeItem;
+import net.vladick.animalistic.item.custom.SpikeSwordItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -43,11 +42,23 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> COCKROACH_SPAWN_EGG = ITEMS.register("cockroach_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.COCKROACH,5396062, 3618884,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.COCKROACH,9786206, 11168092,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> TURKEY_SPAWN_EGG = ITEMS.register("turkey_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.TURKEY,5396062, 3618884,
+            () -> new ForgeSpawnEggItem(ModEntityTypes.TURKEY,5850701, 14765935,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> SLOTH_SPAWN_EGG = ITEMS.register("sloth_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.SLOTH,8082773, 9528411,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> OLM_SPAWN_EGG = ITEMS.register("olm_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.OLM,14208714, 16742308,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> ECHIDNA_SPAWN_EGG = ITEMS.register("echidna_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.ECHIDNA,12299432, 8414555,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
@@ -82,8 +93,36 @@ public class ModItems {
     public static final RegistryObject<Item> ROACH_ANTENNA = ITEMS.register("roach_antenna",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
-    public static final RegistryObject<Item> TURKEY_EGG = ITEMS.register("turkey_egg",
-            () -> new TurkeyEgg(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+    public static final RegistryObject<Item> DECEASED_ROACH = ITEMS.register("deceased_roach",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> TURKEY_FEATHER = ITEMS.register("turkey_feather",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> ROACH_ON_A_STICK = ITEMS.register("roach_on_a_stick",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.ROACH_ON_A_STICK).stacksTo(1)));
+
+    public static final RegistryObject<Item> COOKED_ROACH_ON_A_STICK = ITEMS.register("cooked_roach_on_a_stick",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.COOKED_ROACH_ON_A_STICK).stacksTo(1)));
+
+    public static final RegistryObject<Item> RAW_TURKEY = ITEMS.register("raw_turkey",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.RAW_TURKEY)));
+
+    public static final RegistryObject<Item> COOKED_TURKEY = ITEMS.register("cooked_turkey",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.COOKED_TURKEY)));
+
+    public static final RegistryObject<Item> AVOCADO = ITEMS.register("avocado",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).food(ModFoods.AVOCADO)));
+
+    public static final RegistryObject<Item> HAIR_ALGAE = ITEMS.register("hair_algae",
+            () -> new HairAlgaeItem(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> ECHIDNA_SPIKES = ITEMS.register("echidna_spikes",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> SPIKY_SWORD = ITEMS.register("spiky_sword",
+            () -> new SpikeSwordItem(Tiers.WOOD, 2, 3f,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

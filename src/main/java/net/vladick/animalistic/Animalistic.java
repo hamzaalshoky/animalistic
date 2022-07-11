@@ -58,13 +58,15 @@ public class Animalistic
         ModEntityTypes.register(eventBus);
         ModPotions.register(eventBus);
     }
-
     private void setup(final FMLCommonSetupEvent event) {
-        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.EMPTY,
+        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.WATER,
                 ModItems.ROACH_ANTENNA.get(), Potions.AWKWARD));
 
         BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,
                 ModItems.ROACH_ANTENNA.get(), ModPotions.HURLING_POTION.get()));
+
+        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,
+                ModItems.HAIR_ALGAE.get(), Potions.SLOWNESS));
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

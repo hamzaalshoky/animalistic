@@ -58,13 +58,13 @@ public class ModEntityGeneration {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.WOLVERINE.get(), 6, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.COLD_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 1));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.DEEP_FROZEN_OCEAN)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 1));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 3, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 5, 3, 1));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.KRILL.get(), 5, 1, 3));
         }
         if(doesBiomeMatch(event.getName(), Biomes.STONY_SHORE)) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SEA_SLUG.get(), 6, 1, 3));
@@ -89,6 +89,42 @@ public class ModEntityGeneration {
         }
         if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_SAVANNA)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.TURKEY.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.PLAINS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.TURKEY.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.JUNGLE)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SLOTH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.SPARSE_JUNGLE)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SLOTH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.BAMBOO_JUNGLE)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SLOTH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.LUSH_CAVES)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.SLOTH.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.BADLANDS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.ECHIDNA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.ERODED_BADLANDS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.ECHIDNA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.WOODED_BADLANDS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.ECHIDNA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.ECHIDNA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.OLM.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.OLM.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DEEP_OCEAN)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.OLM.get(), 6, 1, 3));
         }
     }
 

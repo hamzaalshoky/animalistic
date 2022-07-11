@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "animalistic:echidna_spikes"
+    },
+    "B": {
+      "item": "minecraft:wooden_sword"
+    }
+  },
+  "result": {
+    "item": "animalistic:spiky_sword"
+  }
+}

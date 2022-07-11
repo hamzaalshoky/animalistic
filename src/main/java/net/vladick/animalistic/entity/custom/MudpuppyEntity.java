@@ -275,4 +275,37 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
     public SoundEvent getPickupSound() {
         return SoundEvents.BUCKET_FILL_FISH;
     }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand){
+        ItemStack itemstack = player.getItemInHand(hand);
+        Item item = itemstack.getItem();
+
+        Item itemForBartering = ModItems.KRILL_BUCKET.get();
+        if (item == itemForBartering && this.isInWaterOrBubble()){
+            if(Math.random() < 0.25){
+                this.spawnAtLocation(Items.KELP);
+            }else if(Math.random() < 0.25){
+                this.spawnAtLocation(Items.SAND);
+            }else if(Math.random() < 0.25){
+                this.spawnAtLocation(Items.GRAVEL);
+            }else{
+                if(Math.random() < 0.1){
+                    this.spawnAtLocation(Items.COD);
+                }else if(Math.random() < 0.1){
+                    this.spawnAtLocation(Items.SALMON);
+                }else if(Math.random() < 0.05){
+                    this.spawnAtLocation(Items.PUFFERFISH);
+                }
+            }
+            if (!player.getAbilities().instabuild) {
+                itemstack.shrink(1);
+            }
+        }
+        level = player.getLevel();
+        if(!level.isClientSide()){
+
+        }
+        return InteractionResult.CONSUME;
+    }
 }

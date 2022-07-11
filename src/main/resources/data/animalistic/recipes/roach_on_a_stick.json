@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #",
+    "X "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "animalistic:deceased_roach"
+    }
+  },
+  "result": {
+    "item": "animalistic:roach_on_a_stick"
+  }
+}

@@ -19,5 +19,8 @@ public class ModEventBusEvents {
         event.put(ModEntityTypes.SEA_SLUG.get(), SeaSlugEntity.setAttributes());
         event.put(ModEntityTypes.COCKROACH.get(), CockroachEntity.setAttributes());
         event.put(ModEntityTypes.TURKEY.get(), TurkeyEntity.setAttributes());
+        event.put(ModEntityTypes.SLOTH.get(), SlothEntity.setAttributes());
+        event.put(ModEntityTypes.ECHIDNA.get(), EchidnaEntity.setAttributes());
+        event.put(ModEntityTypes.OLM.get(), OlmEntity.setAttributes());
     }
 }

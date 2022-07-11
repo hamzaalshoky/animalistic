@@ -1,0 +1,207 @@
+{
+  "parent": "minecraft:adventure/root",
+
+  "display": {
+    "icon": {
+      "item": "minecraft:netherite_sword",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.adventure.kill_everything.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.kill_everything.description"
+    }
+  },
+  "criteria": {
+    "animalistic:cockroach": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "animalistic:cockroach"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "animalistic:cavy": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:cavy"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:caracal": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:caracal"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:echidna": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:echidna"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:krill": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:krill"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:mudpuppy": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:mudpuppy"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:olm": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:olm"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:sea_slug": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:sea_slug"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:sloth": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:sloth"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:turkey": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:turkey"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "animalistic:wolverine": {
+    "trigger": "minecraft:player_killed_entity",
+    "conditions": {
+      "entity": [
+        {
+          "condition": "minecraft:entity_properties",
+          "predicate": {
+            "type": "animalistic:wolverine"
+          },
+          "entity": "this"
+        }
+      ]
+    }
+  },
+  "requirements": [
+    [
+      "animalistic:cockroach"
+    ],
+    [
+      "animalistic:cavy"
+    ],
+    [
+      "animalistic:caracal"
+    ],
+    [
+      "animalistic:echidna"
+    ],
+    [
+      "animalistic:krill"
+    ],
+    [
+      "animalistic:mudpuppy"
+    ],
+    [
+      "animalistic:olm"
+    ],
+    [
+      "animalistic:sea_slug"
+    ],
+    [
+      "animalistic:sloth"
+    ],
+    [
+      "animalistic:turkey"
+    ],
+    [
+      "animalistic:wolverine"
+    ]
+  ]
+}

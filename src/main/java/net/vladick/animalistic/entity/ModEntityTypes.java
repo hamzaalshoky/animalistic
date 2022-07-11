@@ -54,6 +54,21 @@ public class ModEntityTypes {
                     .sized(0.9f, 1.5f)
                     .build(new ResourceLocation(Animalistic.MOD_ID, "turkey").toString()));
 
+    public static final RegistryObject<EntityType<SlothEntity>> SLOTH = ENTITY_TYPES.register("sloth",
+            () -> EntityType.Builder.of(SlothEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "sloth").toString()));
+
+    public static final RegistryObject<EntityType<EchidnaEntity>> ECHIDNA = ENTITY_TYPES.register("echidna",
+            () -> EntityType.Builder.of(EchidnaEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "echidna").toString()));
+
+    public static final RegistryObject<EntityType<OlmEntity>> OLM = ENTITY_TYPES.register("olm",
+            () -> EntityType.Builder.of(OlmEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "olm").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

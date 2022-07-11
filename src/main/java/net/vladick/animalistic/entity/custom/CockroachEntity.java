@@ -3,28 +3,21 @@ package net.vladick.animalistic.entity.custom;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,9 +36,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.custom.ai.DanceGoal;
-import net.vladick.animalistic.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -64,14 +55,13 @@ public class CockroachEntity extends TamableAnimal implements IAnimatable{
     private boolean cockroachDance;
     private BlockPos jukeboxPosition;
     int moreFoodTicks;
-    int slots = 10;
 
     public CockroachEntity(EntityType<? extends TamableAnimal> p_21803_, Level p_21804_) {
         super(p_21803_, p_21804_);
     }
 
     private static final EntityDataAccessor<Boolean> SHAKING =
-            SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.BOOLEAN);
+            SynchedEntityData.defineId(CockroachEntity.class, EntityDataSerializers.BOOLEAN);
 
 
     public static void dance(LevelAccessor world, BlockPos pos, boolean dancing) {
@@ -222,6 +212,12 @@ public class CockroachEntity extends TamableAnimal implements IAnimatable{
         this.moreFoodTicks = p_29684_.getInt("MoreFoodTicks");
     }
 
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SHAKING, false);
+    }
+
     static class RaidGardenGoal extends MoveToBlockGoal {
         private final CockroachEntity cocker;
         private boolean wantsToRaid;
@@ -305,9 +301,8 @@ public class CockroachEntity extends TamableAnimal implements IAnimatable{
         return false;
     }
 
-    public void setShaking(boolean sitting) {
-        this.entityData.set(SHAKING, sitting);
-        this.setOrderedToSit(sitting);
+    public void setShaking(boolean shaking) {
+        this.entityData.set(SHAKING, shaking);
     }
 
     public boolean isShaking() {
@@ -320,5 +315,51 @@ public class CockroachEntity extends TamableAnimal implements IAnimatable{
             setShaking(true);
         }
 
+    }
+
+    private void touch(Mob p_29606_) {
+        if (p_29606_.hurt(DamageSource.mobAttack(this), 1)) {
+            setShaking(true);
+        }
+
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        Item item = itemstack.getItem();
+
+        Item itemForTaming = Items.WHEAT;
+
+        if (item == itemForTaming && !isTame()) {
+            if (this.level.isClientSide) {
+                return InteractionResult.CONSUME;
+            } else {
+                if (!player.getAbilities().instabuild) {
+                    itemstack.shrink(1);
+                }
+
+                if (!ForgeEventFactory.onAnimalTame(this, player)) {
+                    if (!this.level.isClientSide) {
+                        super.tame(player);
+                        this.navigation.recomputePath();
+                        this.setTarget(null);
+                        this.level.broadcastEntityEvent(this, (byte)7);
+                    }
+                }
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        if(isTame() && !this.level.isClientSide && hand == InteractionHand.MAIN_HAND) {
+            return InteractionResult.SUCCESS;
+        }
+
+        if (itemstack.getItem() == itemForTaming) {
+            return InteractionResult.PASS;
+        }
+
+        return super.mobInteract(player, hand);
     }
 }

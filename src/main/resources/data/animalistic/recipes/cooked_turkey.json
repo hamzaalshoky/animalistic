@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "animalistic:raw_turkey"
+  },
+  "result": "animalistic:cooked_turkey",
+  "experience": 0.35,
+  "cookingtime": 200
+}

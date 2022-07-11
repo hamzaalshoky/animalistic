@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class HurlingEffect extends MobEffect {
     public HurlingEffect(MobEffectCategory p_19451_, int p_19452_) {
-        super(MobEffectCategory.HARMFUL, 3124687);
+        super(MobEffectCategory.HARMFUL, 9786206);
     }
 
     @Override

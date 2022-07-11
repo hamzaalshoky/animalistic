@@ -16,7 +16,13 @@ public class ModEffects {
             () -> new StickyEffect(MobEffectCategory.HARMFUL, 5396062));
 
     public static final RegistryObject<MobEffect> HURLING = MOB_EFFECTS.register("hurling",
-            () -> new HurlingEffect(MobEffectCategory.HARMFUL, 5396062));
+            () -> new HurlingEffect(MobEffectCategory.HARMFUL, 9786206));
+
+    public static final RegistryObject<MobEffect> SPIKED = MOB_EFFECTS.register("spiked",
+            () -> new SpikedEffect(MobEffectCategory.HARMFUL, 9786206));
+
+    public static final RegistryObject<MobEffect> SENSING = MOB_EFFECTS.register("sensing",
+            () -> new SensingEffect(MobEffectCategory.NEUTRAL, 9786206));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
