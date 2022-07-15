@@ -61,6 +61,14 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.ECHIDNA,12299432, 8414555,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
+    public static final RegistryObject<Item> BURROWING_FROG_SPAWN_EGG = ITEMS.register("burrowing_frog_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.BURROWING_FROG,8540767, 9856593,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> CAPYBARA_SPAWN_EGG = ITEMS.register("capybara_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.CAPYBARA,10313525, 910313525,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
             () -> new MobBucketItem(ModEntityTypes.MUDPUPPY, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
@@ -118,6 +126,9 @@ public class ModItems {
             () -> new HairAlgaeItem(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> ECHIDNA_SPIKES = ITEMS.register("echidna_spikes",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> MELON_ON_A_STICK = ITEMS.register("melon_on_a_stick",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> SPIKY_SWORD = ITEMS.register("spiky_sword",
