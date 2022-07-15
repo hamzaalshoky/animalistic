@@ -69,6 +69,16 @@ public class ModEntityTypes {
                     .sized(0.9f, 1.5f)
                     .build(new ResourceLocation(Animalistic.MOD_ID, "olm").toString()));
 
+    public static final RegistryObject<EntityType<BurrowingFrogEntity>> BURROWING_FROG = ENTITY_TYPES.register("burrowing_frog",
+            () -> EntityType.Builder.of(BurrowingFrogEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "burrowing_frog").toString()));
+
+    public static final RegistryObject<EntityType<CapybaraEntity>> CAPYBARA = ENTITY_TYPES.register("capybara",
+            () -> EntityType.Builder.of(CapybaraEntity::new, MobCategory.CREATURE)
+                    .sized(0.9f, 1.5f)
+                    .build(new ResourceLocation(Animalistic.MOD_ID, "capybara").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

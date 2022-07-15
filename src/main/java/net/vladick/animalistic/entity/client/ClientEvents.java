@@ -5,6 +5,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vladick.animalistic.Animalistic;
 import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.custom.BurrowingFrogEntity;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Animalistic.MOD_ID)
 public class ClientEvents {
@@ -22,5 +23,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntityTypes.SLOTH.get(), SlothRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.ECHIDNA.get(), EchidnaRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.OLM.get(), OlmRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.BURROWING_FROG.get(), BurrowingFrogRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.CAPYBARA.get(), CapybaraRenderer::new);
     }
 }

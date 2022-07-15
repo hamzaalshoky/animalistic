@@ -126,6 +126,15 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.DEEP_OCEAN)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.OLM.get(), 6, 1, 3));
         }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.BURROWING_FROG.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.BURROWING_FROG.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.BEACH)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityTypes.BURROWING_FROG.get(), 6, 1, 3));
+        }
     }
 
     public static boolean doesBiomeMatch(ResourceLocation biomeNameIn, ResourceKey<Biome> biomeIn) {

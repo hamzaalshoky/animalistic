@@ -22,5 +22,7 @@ public class ModEventBusEvents {
         event.put(ModEntityTypes.SLOTH.get(), SlothEntity.setAttributes());
         event.put(ModEntityTypes.ECHIDNA.get(), EchidnaEntity.setAttributes());
         event.put(ModEntityTypes.OLM.get(), OlmEntity.setAttributes());
+        event.put(ModEntityTypes.BURROWING_FROG.get(), BurrowingFrogEntity.setAttributes());
+        event.put(ModEntityTypes.CAPYBARA.get(), CapybaraEntity.setAttributes());
     }
 }

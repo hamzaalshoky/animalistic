@@ -65,8 +65,7 @@ public class CaracalEntity extends Animal implements IAnimatable{
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f)
-                .add(Attributes.JUMP_STRENGTH, 0.8f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.3f).build();
     }
 
     protected void registerGoals() {
