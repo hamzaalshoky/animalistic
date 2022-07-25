@@ -7,6 +7,8 @@
   "advancements.adventure.kill_everything.description": "Kill all the animals in the mod, you psycho",
   "advancements.adventure.kill_a_wolverine.title": "Small but Ferocious!",
   "advancements.adventure.kill_a_wolverine.description": "Kill a Wolverine, A small but very Angry and fearless creature!",
+  "advancements.husbandry.capybara_pull_up.title": "Ok I Pull up",
+  "advancements.husbandry.capybara_pull_up.description": "Find a Capybara, the biggest and cutest rodent on earth",
   "entity.animalistic.caracal": "Caracal",
   "entity.animalistic.mudpuppy": "Mudpuppy",
   "entity.animalistic.cavy": "Cavy",
@@ -55,5 +57,10 @@
   "block.animalistic.sea_slug_slime_block": "Sea Slug Slime Block",
   "itemGroup.animalistic_tab": "Animalistic Tab",
   "effect.animalistic.hurling": "Hurling",
-  "effect.animalistic.sticky_toxin": "Sticky Toxin"
+  "effect.animalistic.sticky_toxin": "Sticky Toxin",
+  "sound.animalistic.subtitle.burrowing_frog_ambient": "Burrowing Frog Croaks",
+  "sound.animalistic.subtitle.burrowing_frog_hurt": "Burrowing Frog Hurts",
+  "sound.animalistic.subtitle.burrowing_frog_death": "Burrowing Frog Dies",
+  "sound.animalistic.subtitle.burrowing_frog_hurt": "Capybara Hurts",
+  "sound.animalistic.subtitle.burrowing_frog_death": "Capybara Dies"
 }
