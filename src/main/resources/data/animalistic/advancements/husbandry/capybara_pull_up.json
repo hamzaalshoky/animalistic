@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:adventure/root",
+
+  "display": {
+    "icon": {
+      "item": "animalistic:melon_on_a_stick"
+    },
+    "title": {
+      "translate": "advancements.husbandry.capybara_pull_up.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.capybara_pull_up.description"
+    }
+  },
+  "criteria": {
+    "tame": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "animalistic:capybara"
+        }
+      }
+    }
+  }
+}

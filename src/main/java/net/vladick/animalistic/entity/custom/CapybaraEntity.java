@@ -1,6 +1,5 @@
 package net.vladick.animalistic.entity.custom;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,12 +17,8 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +28,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.ModEntityCreator;
+import net.vladick.animalistic.entity.custom.ai.CapybaraSleepGoal;
 import net.vladick.animalistic.item.ModItems;
+import net.vladick.animalistic.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -79,6 +76,7 @@ public class CapybaraEntity extends Animal implements IAnimatable, ItemSteerable
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(8, new CapybaraSleepGoal(this));
     }
 
     // ANIMATIONS //
@@ -88,15 +86,15 @@ public class CapybaraEntity extends Animal implements IAnimatable, ItemSteerable
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.CAT_AMBIENT;
+        return SoundEvents.BAT_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.WOLF_GROWL;
+        return ModSounds.CAPYBARA_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOLF_DEATH;
+        return ModSounds.CAPYBARA_DEATH.get();
     }
 
     protected float getSoundVolume() {
@@ -133,7 +131,7 @@ public class CapybaraEntity extends Animal implements IAnimatable, ItemSteerable
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob p_146744_) {
-        return ModEntityTypes.CAPYBARA.get().create(serverLevel);
+        return ModEntityCreator.CAPYBARA.get().create(serverLevel);
     }
 
     @Override

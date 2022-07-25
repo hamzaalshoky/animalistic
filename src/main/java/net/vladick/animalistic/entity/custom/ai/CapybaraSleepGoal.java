@@ -5,10 +5,10 @@ import net.vladick.animalistic.entity.custom.CapybaraEntity;
 
 import java.util.EnumSet;
 
-public class SleepGoal extends Goal {
+public class CapybaraSleepGoal extends Goal {
     private final CapybaraEntity capy;
 
-    public SleepGoal(CapybaraEntity capy) {
+    public CapybaraSleepGoal(CapybaraEntity capy) {
         this.capy = capy;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP));
     }
