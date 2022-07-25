@@ -32,6 +32,7 @@ import net.minecraft.world.scores.Team;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.vladick.animalistic.entity.variant.CavyVariant;
 import net.vladick.animalistic.item.ModItems;
+import net.vladick.animalistic.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -86,15 +87,15 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.RABBIT_AMBIENT;
+        return ModSounds.CAVY_AMBIENT.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.RABBIT_HURT;
+        return ModSounds.CAVY_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RABBIT_DEATH;
+        return ModSounds.CAVY_DEATH.get();
     }
 
     protected float getSoundVolume() {
@@ -156,6 +157,16 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
     public boolean isHamza(){
         String s = ChatFormatting.stripFormatting(this.getName().getString());
         return s.toLowerCase().equals("hamza") || s.toLowerCase().equals("hamzi") || s.toLowerCase().equals("hamzaing");
+    }
+
+    public boolean isBean(){
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s.toLowerCase().equals("fasolka");
+    }
+
+    public boolean isCarrot(){
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s.toLowerCase().equals("morkovka");
     }
 
     @Nullable

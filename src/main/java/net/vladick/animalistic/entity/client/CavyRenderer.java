@@ -28,6 +28,8 @@ public class CavyRenderer extends GeoEntityRenderer<CavyEntity> {
 
     private static final ResourceLocation FISTASHKA = new ResourceLocation("animalistic:textures/entity/cavy/cavy_fistashka.png");
     private static final ResourceLocation MYHDALKA = new ResourceLocation("animalistic:textures/entity/cavy/cavy_myhdalka.png");
+    private static final ResourceLocation BEAN = new ResourceLocation("animalistic:textures/entity/cavy/cavy_fasolka.png");
+    private static final ResourceLocation CARROT = new ResourceLocation("animalistic:textures/entity/cavy/cavy_morkovka.png");
     private static final ResourceLocation HAMZA = new ResourceLocation("animalistic:textures/entity/cavy/cavy_hamza.png");
     
     
@@ -39,7 +41,7 @@ public class CavyRenderer extends GeoEntityRenderer<CavyEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(CavyEntity instance) {
-        return instance.isFistashka() ? FISTASHKA : instance.isMyhdalka() ? MYHDALKA : instance.isHamza() ? HAMZA : LOCATION_BY_VARIANT.get(instance.getVariant());
+        return instance.isFistashka() ? FISTASHKA : instance.isMyhdalka() ? MYHDALKA : instance.isHamza() ? HAMZA : instance.isBean() ? BEAN : instance.isCarrot() ? CARROT : LOCATION_BY_VARIANT.get(instance.getVariant());
     }
 
 
