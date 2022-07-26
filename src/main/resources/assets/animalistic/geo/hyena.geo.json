@@ -1,0 +1,88 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.hyena",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "da_baba",
+					"pivot": [0, 10, 2]
+				},
+				{
+					"name": "body",
+					"parent": "da_baba",
+					"pivot": [0, 5, 2],
+					"cubes": [
+						{"origin": [-3, 5, -5], "size": [6, 5, 10], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 10, 5],
+					"cubes": [
+						{"origin": [-1, 8, 5], "size": [2, 2, 6], "uv": [20, 20]}
+					]
+				},
+				{
+					"name": "neck",
+					"parent": "da_baba",
+					"pivot": [0, 6, -5],
+					"cubes": [
+						{"origin": [-1, 1, -1], "size": [2, 6, 2], "pivot": [1, 4, -5], "rotation": [90, 0, 0], "uv": [10, 26]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "neck",
+					"pivot": [0, 13, -6.09259],
+					"cubes": [
+						{"origin": [-3.5, 10, -9], "size": [7, 5, 6], "uv": [0, 15]},
+						{"origin": [-3, 10, -12], "size": [6, 3, 3], "uv": [22, 0]},
+						{"origin": [-2, 13, -5], "size": [1, 4, 3], "pivot": [0, -8, -15], "rotation": [0, -10, 0], "uv": [30, 19]},
+						{"origin": [1, 13, -5], "size": [1, 4, 3], "pivot": [0, -8, -15], "rotation": [0, 10, 0], "uv": [29, 12]}
+					]
+				},
+				{
+					"name": "rleg",
+					"parent": "da_baba",
+					"pivot": [2, 5, 3],
+					"cubes": [
+						{"origin": [1, 0, 2], "size": [2, 5, 3], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "lleg",
+					"parent": "da_baba",
+					"pivot": [-2, 5, 3],
+					"cubes": [
+						{"origin": [-3, 0, 2], "size": [2, 5, 3], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "rleg2",
+					"parent": "da_baba",
+					"pivot": [2, 5, -3],
+					"cubes": [
+						{"origin": [1, 0, -4], "size": [2, 5, 2], "uv": [26, 28]}
+					]
+				},
+				{
+					"name": "lleg2",
+					"parent": "da_baba",
+					"pivot": [-2, 5, -3],
+					"cubes": [
+						{"origin": [-3, 0, -4], "size": [2, 5, 2], "uv": [18, 28]}
+					]
+				}
+			]
+		}
+	]
+}
