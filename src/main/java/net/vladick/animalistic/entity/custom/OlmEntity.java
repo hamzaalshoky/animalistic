@@ -20,7 +20,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.Cod;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.player.Player;
@@ -32,8 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.vladick.animalistic.effects.ModEffects;
-import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.entity.variant.MudpuppyVariant;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.entity.variant.OlmVariant;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -102,7 +100,7 @@ public class OlmEntity extends Animal implements IAnimatable{
 
     @Nullable
     public AgeableMob getBreedOffspring(ServerLevel p_149112_, AgeableMob p_149113_) {
-        OlmEntity olm = ModEntityTypes.OLM.get().create(p_149112_);
+        OlmEntity olm = ModEntityCreator.OLM.get().create(p_149112_);
         if (olm != null) {
             OlmVariant olm$variant;
             if (useRareVariant(this.random)) {

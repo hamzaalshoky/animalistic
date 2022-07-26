@@ -14,9 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -57,6 +55,8 @@ public class TurkeyEntity extends Animal implements IAnimatable {
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Rabbit.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Pig.class, 5, true, true, (Predicate<LivingEntity>)null));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Chicken.class, 5, true, true, (Predicate<LivingEntity>)null));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Fox.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -69,7 +69,7 @@ public class TurkeyEntity extends Animal implements IAnimatable {
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 8.0D)
-                .add(Attributes.ATTACK_DAMAGE, 1.0f)
+                .add(Attributes.ATTACK_DAMAGE, 0.5f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.25f).build();
     }
@@ -96,7 +96,7 @@ public class TurkeyEntity extends Animal implements IAnimatable {
     }
 
     public AgeableMob getBreedOffspring(ServerLevel p_148884_, AgeableMob p_148885_) {
-        return ModEntityTypes.TURKEY.get().create(p_148884_);
+        return ModEntityCreator.TURKEY.get().create(p_148884_);
     }
 
     public boolean isFood(ItemStack p_28271_) {

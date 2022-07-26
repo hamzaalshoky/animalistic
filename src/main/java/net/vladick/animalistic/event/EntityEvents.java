@@ -4,8 +4,6 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -18,9 +16,7 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vladick.animalistic.Animalistic;
-import net.vladick.animalistic.effects.ModEffects;
-import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.entity.custom.CaracalEntity;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.item.ModItems;
 
 import java.util.List;
@@ -36,7 +32,7 @@ public class EntityEvents {
             ItemStack stack = event.getItemStack();
             if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive()) {
                 ItemStack bucket = ItemStack.EMPTY;
-                if (entity.getType() == ModEntityTypes.MUDPUPPY.get()) {
+                if (entity.getType() == ModEntityCreator.MUDPUPPY.get()) {
                     bucket = new ItemStack(ModItems.MUDPUPPY_BUCKET.get());
                 } else {
                     return;
@@ -63,7 +59,7 @@ public class EntityEvents {
                 entity.discard();
             }else if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive()) {
                 ItemStack bucket = ItemStack.EMPTY;
-                if (entity.getType() == ModEntityTypes.KRILL.get()) {
+                if (entity.getType() == ModEntityCreator.KRILL.get()) {
                     bucket = new ItemStack(ModItems.KRILL_BUCKET.get());
                 } else {
                     return;

@@ -6,10 +6,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,9 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,13 +26,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.level.pathfinder.PathFinder;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
-import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.entity.variant.MudpuppyVariant;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.entity.variant.MudpuppyVariant;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -107,7 +98,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
     @Nullable
     public AgeableMob getBreedOffspring(ServerLevel p_149112_, AgeableMob p_149113_) {
-        MudpuppyEntity mudpuppy = ModEntityTypes.MUDPUPPY.get().create(p_149112_);
+        MudpuppyEntity mudpuppy = ModEntityCreator.MUDPUPPY.get().create(p_149112_);
         if (mudpuppy != null) {
             MudpuppyVariant mudpuppy$variant;
             if (useRareVariant(this.random)) {

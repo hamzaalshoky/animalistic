@@ -1,0 +1,50 @@
+{
+  "burrowing_frog_ambient": {
+    "subtitle": "sounds.animalistic.burrowing_frog_croaks",
+    "sounds": [
+      "animalistic:burrowing_frog_ambient"
+    ]
+  },
+  "burrowing_frog_hurt": {
+    "subtitle": "sounds.animalistic.burrowing_frog_hurt",
+    "sounds": [
+      "animalistic:burrowing_frog_hurt"
+    ]
+  },
+  "burrowing_frog_death": {
+    "subtitle": "sounds.animalistic.burrowing_frog_death",
+    "sounds": [
+      "animalistic:burrowing_frog_death"
+    ]
+  },
+  "capybara_hurt": {
+    "subtitle": "sounds.animalistic.capybara_hurt",
+    "sounds": [
+      "animalistic:capybara_hurt"
+    ]
+  },
+  "capybara_death": {
+    "subtitle": "sounds.animalistic.capybara_death",
+    "sounds": [
+      "animalistic:capybara_death"
+    ]
+  },
+  "cavy_ambient": {
+    "subtitle": "sounds.animalistic.cavy_croaks",
+    "sounds": [
+      "animalistic:cavy_ambient"
+    ]
+  },
+  "cavy_hurt": {
+    "subtitle": "sounds.animalistic.cavy_hurt",
+    "sounds": [
+      "animalistic:cavy_hurt"
+    ]
+  },
+  "cavy_death": {
+    "subtitle": "sounds.animalistic.cavy_death",
+    "sounds": [
+      "animalistic:cavy_death"
+    ]
+  }
+}

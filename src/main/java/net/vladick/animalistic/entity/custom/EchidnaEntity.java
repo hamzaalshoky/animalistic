@@ -14,17 +14,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.vladick.animalistic.effects.ModEffects;
-import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -46,7 +43,7 @@ public class EchidnaEntity extends Animal implements IAnimatable{
         if (p_29634_ instanceof Player && ((Player)p_29634_).isCreative() || p_29634_ instanceof EchidnaEntity) {
             return false;
         } else {
-            return p_29634_.getType() == ModEntityTypes.SLOTH.get();
+            return p_29634_.getType() == ModEntityCreator.SLOTH.get();
         }
     };
 
@@ -123,7 +120,7 @@ public class EchidnaEntity extends Animal implements IAnimatable{
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob p_146744_) {
-        return ModEntityTypes.CARACAL.get().create(serverLevel);
+        return ModEntityCreator.CARACAL.get().create(serverLevel);
     }
 
     @Override

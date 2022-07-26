@@ -1,13 +1,10 @@
 package net.vladick.animalistic;
 
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -19,10 +16,10 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.vladick.animalistic.block.ModBlocks;
 import net.vladick.animalistic.effects.ModEffects;
-import net.vladick.animalistic.entity.ModEntityTypes;
-import net.vladick.animalistic.entity.custom.*;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.item.ModItems;
 import net.vladick.animalistic.potion.ModPotions;
+import net.vladick.animalistic.sound.ModSounds;
 import net.vladick.animalistic.util.BetterBrewingRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,8 +52,9 @@ public class Animalistic
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
         ModEffects.register(eventBus);
-        ModEntityTypes.register(eventBus);
+        ModEntityCreator.register(eventBus);
         ModPotions.register(eventBus);
+        ModSounds.register(eventBus);
     }
     private void setup(final FMLCommonSetupEvent event) {
         BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.WATER,

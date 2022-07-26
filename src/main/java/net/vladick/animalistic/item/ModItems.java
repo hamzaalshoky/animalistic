@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.vladick.animalistic.Animalistic;
-import net.vladick.animalistic.entity.ModEntityTypes;
+import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.item.custom.HairAlgaeItem;
 import net.vladick.animalistic.item.custom.SpikeSwordItem;
 
@@ -18,63 +18,67 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, Animalistic.MOD_ID);
 
     public static final RegistryObject<Item> MUDPUPPY_SPAWN_EGG = ITEMS.register("mudpuppy_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.MUDPUPPY,5982784, 4797748,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.MUDPUPPY,5982784, 4797748,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> CARACAL_SPAWN_EGG = ITEMS.register("caracal_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.CARACAL,10381639, 9064254,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.CARACAL,10381639, 9064254,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> WOLVERINE_SPAWN_EGG = ITEMS.register("wolverine_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.WOLVERINE,7690567, 4274744,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.WOLVERINE,7690567, 4274744,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> CAVY_SPAWN_EGG = ITEMS.register("cavy_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.CAVY,16235412, 15180944,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.CAVY,16235412, 15180944,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> KRILL_SPAWN_EGG = ITEMS.register("krill_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.KRILL,14932690, 15704185,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.KRILL,14932690, 15704185,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> SEA_SLUG_SPAWN_EGG = ITEMS.register("sea_slug_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.SEA_SLUG,5396062, 3618884,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.SEA_SLUG,5396062, 3618884,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> COCKROACH_SPAWN_EGG = ITEMS.register("cockroach_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.COCKROACH,9786206, 11168092,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.COCKROACH,9786206, 11168092,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> TURKEY_SPAWN_EGG = ITEMS.register("turkey_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.TURKEY,5850701, 14765935,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.TURKEY,5850701, 14765935,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> SLOTH_SPAWN_EGG = ITEMS.register("sloth_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.SLOTH,8082773, 9528411,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.SLOTH,8082773, 9528411,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> OLM_SPAWN_EGG = ITEMS.register("olm_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.OLM,14208714, 16742308,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.OLM,14208714, 16742308,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> ECHIDNA_SPAWN_EGG = ITEMS.register("echidna_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.ECHIDNA,12299432, 8414555,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.ECHIDNA,12299432, 8414555,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> BURROWING_FROG_SPAWN_EGG = ITEMS.register("burrowing_frog_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.BURROWING_FROG,8540767, 9856593,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.BURROWING_FROG,8540767, 9856593,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> CAPYBARA_SPAWN_EGG = ITEMS.register("capybara_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityTypes.CAPYBARA,10313525, 910313525,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.CAPYBARA,10313525, 910313525,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> HIPPO_SPAWN_EGG = ITEMS.register("hippo_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityCreator.HIPPO,10313525, 910313525,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
-            () -> new MobBucketItem(ModEntityTypes.MUDPUPPY, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
+            () -> new MobBucketItem(ModEntityCreator.MUDPUPPY, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> KRILL_BUCKET = ITEMS.register("krill_bucket",
-            () -> new MobBucketItem(ModEntityTypes.KRILL, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
+            () -> new MobBucketItem(ModEntityCreator.KRILL, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> DUMPLINGS = ITEMS.register("dumplings",
