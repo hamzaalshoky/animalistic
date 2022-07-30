@@ -31,7 +31,7 @@ logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
 credits="" #optional
 # A text field displayed in the mod UI
-authors="Vladick, Hamzaa" #optional
+authors="Piedyslava(Vlada, Vladpies), Hamzaa" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 the funi animals

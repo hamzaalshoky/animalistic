@@ -244,54 +244,42 @@
 		"sleep": {
 			"loop": true,
 			"bones": {
-				"torso": {
-					"position": {
-						"vector": [0, -6, 0]
-					}
-				},
 				"head": {
 					"rotation": {
-						"vector": [-12.5, 0, 0]
-					},
-					"position": {
-						"vector": [0, -13, 0]
+						"vector": [5, 3, 0]
 					}
 				},
 				"jaw": {
 					"rotation": {
-						"vector": [12.5, 0, 0]
+						"vector": [8, 0, 0]
 					}
 				},
 				"leg_1": {
 					"rotation": {
-						"vector": [0, 0, -82.5]
-					},
-					"position": {
-						"vector": [0, -6, 0]
+						"vector": [0, 0, 30]
 					}
 				},
 				"leg_2": {
 					"rotation": {
-						"vector": [90, 0, 0]
-					},
-					"position": {
-						"vector": [0, -6, 0]
+						"vector": [0, 0, 15]
 					}
 				},
 				"leg_3": {
 					"rotation": {
-						"vector": [0, 0, 87.5]
-					},
-					"position": {
-						"vector": [0, -6, 0]
+						"vector": [0, 0, 27.5]
 					}
 				},
 				"leg_4": {
 					"rotation": {
-						"vector": [90, 0, 0]
+						"vector": [0, 0, 22.5]
+					}
+				},
+				"heepo": {
+					"rotation": {
+						"vector": [0, 0, -90]
 					},
 					"position": {
-						"vector": [0, -6, 0]
+						"vector": [11, 8, 0]
 					}
 				}
 			}

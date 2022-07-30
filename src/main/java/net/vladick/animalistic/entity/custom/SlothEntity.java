@@ -52,7 +52,7 @@ public class SlothEntity extends Animal implements IAnimatable{
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.1f).build();
     }
 
     protected PathNavigation createNavigation(Level p_33802_) {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#B#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "animalistic:muddy_leather"
+    },
+    "B": {
+      "item": "minecraft:leather_leggings"
+    }
+  },
+  "result": {
+    "item": "animalistic:muddy_leather_pants"
+  }
+}
