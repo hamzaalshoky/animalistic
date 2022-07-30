@@ -63,11 +63,8 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.DEEP_FROZEN_OCEAN)) {
             event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.KRILL.get(), 3, 1, 3));
         }
-        if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.KRILL.get(), 5, 1, 3));
-        }
         if(doesBiomeMatch(event.getName(), Biomes.STONY_SHORE)) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.SEA_SLUG.get(), 3, 1, 1));
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.SEA_SLUG.get(), 3, 1, 2));
         }
         if(doesBiomeMatch(event.getName(), Biomes.LUSH_CAVES)) {
             event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.COCKROACH.get(), 6, 1, 3));
@@ -146,6 +143,21 @@ public class ModEntityGeneration {
         }
         if(doesBiomeMatch(event.getName(), Biomes.RIVER)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.HIPPO.get(), 6, 5, 8));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_GRAVELLY_HILLS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.WINDSWEPT_HILLS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.JAGGED_PEAKS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.STONY_PEAKS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
         }
     }
 

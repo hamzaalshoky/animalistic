@@ -19,8 +19,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +27,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.scores.Team;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.vladick.animalistic.entity.custom.ai.ChinchillaBeg;
 import net.vladick.animalistic.entity.variant.CavyVariant;
 import net.vladick.animalistic.item.ModItems;
 import net.vladick.animalistic.sound.ModSounds;
@@ -44,27 +44,33 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
 
-public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob{
+public class ChinchillaEntity extends TamableAnimal implements IAnimatable{
 
-    private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> BEGGING =
+            SynchedEntityData.defineId(ChinchillaEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private static final EntityDataAccessor<Boolean> SITTING =
-            SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> BATHING = 
+            SynchedEntityData.defineId(ChinchillaEntity.class, EntityDataSerializers.BOOLEAN);
+
+    public float batheProgress;
+    public float prevBatheProgress;
 
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public CavyEntity(EntityType<? extends TamableAnimal> p_21803_, Level p_21804_) {
+    public float begProgress;
+    public float prevBegProgress;
+
+    public ChinchillaEntity(EntityType<? extends TamableAnimal> p_21803_, Level p_21804_) {
         super(p_21803_, p_21804_);
     }
 
 
     public static AttributeSupplier setAttributes() {
         return TamableAnimal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0D)
+                .add(Attributes.MAX_HEALTH, 5.0D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.2f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.3f).build();
     }
 
 
@@ -78,6 +84,7 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(5, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.goalSelector.addGoal(1, new ChinchillaBeg(this, 1.0D));
     }
 
     // ANIMATIONS //
@@ -109,13 +116,8 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
             return PlayState.CONTINUE;
         }
 
-        if (this.isSitting() && this.isFallFlying() || this.isSitting()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("sit", true));
-            return PlayState.CONTINUE;
-        }
-
-        if (event.isMoving() || this.isInWaterOrBubble()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("drown", true));
+        if (this.isBegging()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("beg", true));
             return PlayState.CONTINUE;
         }
 
@@ -136,74 +138,29 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
 
     // VARIANTS //
 
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_,
-                                        MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_,
-                                        @Nullable CompoundTag p_146750_) {
-        CavyVariant variant = Util.getRandom(CavyVariant.values(), this.random);
-        setVariant(variant);
-        return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
-    }
-
-    public boolean isFistashka(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase().equals("fistashka");
-    }
-
-    public boolean isMyhdalka(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase().equals("myhdalka");
-    }
-
-    public boolean isHamza(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase().equals("hamza") || s.toLowerCase().equals("hamzi") || s.toLowerCase().equals("hamzaing");
-    }
-
-    public boolean isBean(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase().equals("fasolka") || s.toLowerCase().equals("bean");
-    }
-
-    public boolean isCarrot(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase().equals("morkovka") || s.toLowerCase().equals("carrot");
-    }
-
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel p_146743_, AgeableMob p_146744_) {
         return null;
     }
 
-    public CavyVariant getVariant() {
-        return CavyVariant.byId(this.getTypeVariant() & 255);
-    }
-
-    private int getTypeVariant() {
-        return this.entityData.get(DATA_ID_TYPE_VARIANT);
-    }
-
-    private void setVariant(CavyVariant variant) {
-        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
-    }
-
     @Override
     public void readAdditionalSaveData(CompoundTag p_21815_) {
         super.readAdditionalSaveData(p_21815_);
-        this.entityData.set(DATA_ID_TYPE_VARIANT, p_21815_.getInt("Variant"));
+        this.setBathing(p_21815_.getBoolean("Bathing")); 
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putInt("Variant", this.getTypeVariant());
+        tag.putBoolean("Bathing", isBathing());
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(SITTING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+        this.entityData.define(BEGGING, Boolean.valueOf(false));
+        this.entityData.define(BATHING, Boolean.valueOf(false));
     }
 
     @Override
@@ -211,33 +168,32 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
-        Item itemForTaming = Items.BEETROOT;
+        Item itemForTaming = Items.BEETROOT_SEEDS;
+        Item itemForTaming2 = Items.MELON_SEEDS;
+        Item itemForTaming3 = Items.PUMPKIN_SEEDS;
+        Item itemForTaming4 = Items.WHEAT_SEEDS;
 
-        if (item == itemForTaming && !isTame()) {
+        if (item == itemForTaming || item == itemForTaming2 || item == itemForTaming3 || item == itemForTaming4 && !isTame()) {
             if (this.level.isClientSide) {
                 return InteractionResult.CONSUME;
             } else {
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
-
                 if (!ForgeEventFactory.onAnimalTame(this, player)) {
                     if (!this.level.isClientSide) {
                         super.tame(player);
                         this.navigation.recomputePath();
                         this.setTarget(null);
                         this.level.broadcastEntityEvent(this, (byte)7);
-                        setSitting(true);
                     }
                 }
 
                 return InteractionResult.SUCCESS;
             }
-        }
-
-        if(isTame() && !this.level.isClientSide && hand == InteractionHand.MAIN_HAND) {
-            setSitting(!isSitting());
-            return InteractionResult.SUCCESS;
+        }else if(this.isBathing() && item == itemForTaming || item == itemForTaming2 || item == itemForTaming3 || item == itemForTaming4){
+            spawnAtLocation(ModItems.CHINCHILLA_FUR.get());
+            this.setBathing(false);
         }
 
         if (itemstack.getItem() == itemForTaming) {
@@ -245,15 +201,6 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
         }
 
         return super.mobInteract(player, hand);
-    }
-
-    public void setSitting(boolean sitting) {
-        this.entityData.set(SITTING, sitting);
-        this.setOrderedToSit(sitting);
-    }
-
-    public boolean isSitting() {
-        return this.entityData.get(SITTING);
     }
 
     @Override
@@ -267,32 +214,59 @@ public class CavyEntity extends TamableAnimal implements IAnimatable, NeutralMob
     }
 
     public boolean canBeLeashed(Player player) {
-        return false;
+        return true;
     }
 
-    @Override
-    public int getRemainingPersistentAngerTime() {
-        return 0;
+    public void tick() {
+        super.tick();
+        this.prevBatheProgress = batheProgress;
+        this.prevBegProgress = begProgress;
+        if (this.isBegging() && begProgress < 5F) {
+            begProgress++;
+        }
+        if (!this.isBegging() && begProgress > 0F) {
+            begProgress--;
+        }
+        if (this.isBathing() && batheProgress < 5F) {
+            batheProgress++;
+        }
+        if (!this.isBathing() && batheProgress > 0F) {
+            batheProgress--;
+        }
+        if (!this.level.isClientSide) {
+            if (this.level.isDay() && this.getLastHurtByMob() == null && !this.isBegging()) {
+                if (tickCount % 10 == 0 && this.getRandom().nextInt(750) == 0) {
+                    this.setBathing(true);
+                }
+            } else if (this.isBathing()) {
+                this.setBathing(false);
+            }
+        }
     }
 
-    @Override
-    public void setRemainingPersistentAngerTime(int p_21673_) {
-
+    public boolean isBathing() {
+        return this.entityData.get(BATHING).booleanValue();
     }
 
-    @Nullable
-    @Override
-    public UUID getPersistentAngerTarget() {
-        return null;
+    public void setBathing(boolean bathing) {
+        this.entityData.set(BATHING, Boolean.valueOf(bathing));
     }
 
-    @Override
-    public void setPersistentAngerTarget(@Nullable UUID p_21672_) {
-
+    public boolean isBegging() {
+        return this.entityData.get(BEGGING).booleanValue();
     }
 
-    @Override
-    public void startPersistentAngerTimer() {
-
+    public void setBegging(boolean begging) {
+        this.entityData.set(BEGGING, Boolean.valueOf(begging));
     }
+
+    public boolean hurt(DamageSource source, float amount) {
+        boolean prev = super.hurt(source, amount);
+        if (prev) {
+            this.setBathing(false);
+            return prev;
+        }
+        return prev;
+    }
+
 }

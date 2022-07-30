@@ -1,6 +1,7 @@
 package net.vladick.animalistic.item;
 
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -70,7 +71,11 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> HIPPO_SPAWN_EGG = ITEMS.register("hippo_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntityCreator.HIPPO,10313525, 910313525,
+            () -> new ForgeSpawnEggItem(ModEntityCreator.HIPPO,6709093, 7564914,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> CHINCHILLA_SPAWN_EGG = ITEMS.register("chinchilla_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityCreator.CHINCHILLA,9405318, 10656409,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
@@ -135,8 +140,18 @@ public class ModItems {
     public static final RegistryObject<Item> MELON_ON_A_STICK = ITEMS.register("melon_on_a_stick",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
+    public static final RegistryObject<Item> MUD = ITEMS.register("mud",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> CHINCHILLA_FUR = ITEMS.register("chinchilla_fur",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
     public static final RegistryObject<Item> SPIKY_SWORD = ITEMS.register("spiky_sword",
             () -> new SpikeSwordItem(Tiers.WOOD, 2, 3f,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> MUDDY_LEATHER_PANTS = ITEMS.register("muddy_leather_pants",
+            () -> new ModArmorItem(ModArmorMaterials.MUDDY_LEATHER, EquipmentSlot.LEGS,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static void register(IEventBus eventBus) {

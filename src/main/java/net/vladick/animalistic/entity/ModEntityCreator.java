@@ -36,6 +36,7 @@ public class ModEntityCreator {
     public static final RegistryObject<EntityType<BurrowingFrogEntity>> BURROWING_FROG = ENTITY_TYPES.register("burrowing_frog", () -> EntityType.Builder.of(BurrowingFrogEntity::new, MobCategory.CREATURE).sized(0.8f, 0.8f).build(new ResourceLocation(Animalistic.MOD_ID, "burrowing_frog").toString()));
     public static final RegistryObject<EntityType<CapybaraEntity>> CAPYBARA = ENTITY_TYPES.register("capybara", () -> EntityType.Builder.of(CapybaraEntity::new, MobCategory.CREATURE).sized(1.5f, 1.1f).build(new ResourceLocation(Animalistic.MOD_ID, "capybara").toString()));
     public static final RegistryObject<EntityType<HippoEntity>> HIPPO = ENTITY_TYPES.register("hippo", () -> EntityType.Builder.of(HippoEntity::new, MobCategory.CREATURE).sized(0.9f, 1.5f).build(new ResourceLocation(Animalistic.MOD_ID, "hippo").toString()));
+    public static final RegistryObject<EntityType<ChinchillaEntity>> CHINCHILLA = ENTITY_TYPES.register("chinchilla", () -> EntityType.Builder.of(ChinchillaEntity::new, MobCategory.CREATURE).sized(0.9f, 1.5f).build(new ResourceLocation(Animalistic.MOD_ID, "chinchilla").toString()));
 
     // ATTRIBUTES
 
@@ -55,6 +56,7 @@ public class ModEntityCreator {
         event.put(ModEntityCreator.BURROWING_FROG.get(), BurrowingFrogEntity.setAttributes());
         event.put(ModEntityCreator.CAPYBARA.get(), CapybaraEntity.setAttributes());
         event.put(ModEntityCreator.HIPPO.get(), HippoEntity.setAttributes());
+        event.put(CHINCHILLA.get(), ChinchillaEntity.setAttributes());
     }
 
     // RENDERERS
@@ -75,6 +77,7 @@ public class ModEntityCreator {
         event.registerEntityRenderer(ModEntityCreator.BURROWING_FROG.get(), BurrowingFrogRenderer::new);
         event.registerEntityRenderer(ModEntityCreator.CAPYBARA.get(), CapybaraRenderer::new);
         event.registerEntityRenderer(ModEntityCreator.HIPPO.get(), HippoRenderer::new);
+        event.registerEntityRenderer(ModEntityCreator.CHINCHILLA.get(), ChinchillaRenderer::new);
     }
 
     public static void register(IEventBus eventBus) {

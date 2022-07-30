@@ -25,6 +25,10 @@ public class ModBlocks {
             () -> new SeaSlugSlimeBLock(BlockBehaviour.Properties.of(Material.CLAY)
                     .strength(2f)), ModCreativeModeTabs.ANIMALISTIC_TAB);
 
+    public static final RegistryObject<Block> CHINCHILLA_FUR_BLOCK = registerBlock("chinchilla_fur_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.WOOL)
+                    .strength(1f)), ModCreativeModeTabs.ANIMALISTIC_TAB);
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

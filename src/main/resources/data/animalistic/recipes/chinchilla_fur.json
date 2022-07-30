@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "animalistic:chinchilla_fur_block"
+    }
+  },
+  "result": {
+    "item": "animalistic:chinchilla_fur",
+    "count": 9
+  }
+}
