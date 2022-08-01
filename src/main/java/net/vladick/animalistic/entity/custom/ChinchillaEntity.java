@@ -234,8 +234,8 @@ public class ChinchillaEntity extends TamableAnimal implements IAnimatable{
             batheProgress--;
         }
         if (!this.level.isClientSide) {
-            if (this.level.isDay() && this.getLastHurtByMob() == null && !this.isBegging()) {
-                if (tickCount % 10 == 0 && this.getRandom().nextInt(750) == 0) {
+            if (this.level.isDay() && this.getLastHurtByMob() == null) {
+                if (this.getRandom().nextInt(100) == 0) {
                     this.setBathing(true);
                 }
             } else if (this.isBathing()) {

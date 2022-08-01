@@ -154,6 +154,10 @@ public class ModItems {
             () -> new ModArmorItem(ModArmorMaterials.MUDDY_LEATHER, EquipmentSlot.LEGS,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
+    public static final RegistryObject<Item> CHINCHILLA_FUR_COAT = ITEMS.register("chinchilla_fur_coat",
+            () -> new ArmorItem(ModArmorMaterials.CHINCHILLA_FUR, EquipmentSlot.CHEST,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

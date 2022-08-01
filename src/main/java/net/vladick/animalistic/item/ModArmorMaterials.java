@@ -15,6 +15,10 @@ public enum ModArmorMaterials implements ArmorMaterial {
     MUDDY_LEATHER("muddy_leather", 13, new int[]{2, 3, 5, 3}, 21,
     SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, () -> {
         return Ingredient.of(ModItems.MUD.get());
+    }),
+    CHINCHILLA_FUR("chinchilla_fur", 13, new int[]{2, 3, 5, 3}, 2,
+    SoundEvents.ARMOR_EQUIP_LEATHER, 0.3F, 0.0F, () -> {
+        return Ingredient.of(ModItems.CHINCHILLA_FUR.get());
     });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
