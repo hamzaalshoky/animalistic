@@ -114,7 +114,7 @@ public class SlothEntity extends Animal implements IAnimatable{
             return PlayState.CONTINUE;
         }
 
-        if (this.isClimbing()) {
+        if (this.onClimbable()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("climb", true));
             return PlayState.CONTINUE;
         }

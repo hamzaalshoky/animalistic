@@ -13,6 +13,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.JumpControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
@@ -22,6 +24,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.RandomSource;
+import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.vladick.animalistic.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -38,14 +44,23 @@ public class BurrowingFrogEntity extends Animal implements IAnimatable{
 
     private AnimationFactory factory = new AnimationFactory(this);
 
-    private static final EntityDataAccessor<Boolean> BURROWED =
-            SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> BURROWED = SynchedEntityData.defineId(CavyEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> JUMP_ACTIVE = SynchedEntityData.defineId(BurrowingFrogEntity.class, EntityDataSerializers.BOOLEAN);
     public float burrowProgress;
     public float prevBurrowProgress;
     private int burrowCooldown = 0;
+    public float reboundProgress;
+    public float prevReboundProgress;
+    public float jumpProgress;
+    public float prevJumpProgress;
+    private int jumpTicks;
+    private int jumpDuration;
+    private boolean wasOnGround;
+    private int currentMoveTypeDuration;
 
     public BurrowingFrogEntity(EntityType<? extends Animal> p_27557_, Level p_27558_) {
         super(p_27557_, p_27558_);
+        this.jumpControl = new BurrowingFrogEntity.JumpHelperController(this);
     }
 
 
@@ -132,6 +147,7 @@ public class BurrowingFrogEntity extends Animal implements IAnimatable{
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(BURROWED, false);
+        this.entityData.define(JUMP_ACTIVE, false);
     }
 
     public void setBurrowed(boolean sitting) {
@@ -205,6 +221,8 @@ public class BurrowingFrogEntity extends Animal implements IAnimatable{
     public void tick() {
         super.tick();
         prevBurrowProgress = burrowProgress;
+        this.prevJumpProgress = jumpProgress;
+        this.prevReboundProgress = reboundProgress;
         if (this.isBurrowed() && burrowProgress < 5F) {
             burrowProgress += 0.5F;
         }
@@ -223,6 +241,29 @@ public class BurrowingFrogEntity extends Animal implements IAnimatable{
                 this.setBurrowed(false);
             }
         }
+        if (!level.isClientSide) {
+            this.entityData.set(JUMP_ACTIVE, !this.isOnGround());
+        }
+        if (this.entityData.get(JUMP_ACTIVE)) {
+            if (jumpProgress < 5F) {
+                jumpProgress += 1F;
+                if (reboundProgress > 0) {
+                    reboundProgress--;
+                }
+            }
+            if (jumpProgress >= 5F) {
+                if (reboundProgress < 5F) {
+                    reboundProgress += 1;
+                }
+            }
+        } else {
+            if (reboundProgress > 0) {
+                reboundProgress = Math.max(reboundProgress - 1F, 0);
+            }
+            if (jumpProgress > 0) {
+                jumpProgress = Math.max(jumpProgress - 1F, 0);
+            }
+        }
     }
 
     public boolean hurt(DamageSource source, float amount) {
@@ -236,5 +277,219 @@ public class BurrowingFrogEntity extends Animal implements IAnimatable{
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
         return source == DamageSource.IN_WALL || source == DamageSource.FALLING_BLOCK || super.isInvulnerableTo(source);
+    }
+
+    public float getJumpCompletion(float partialTicks) {
+        return this.jumpDuration == 0 ? 0.0F : ((float) this.jumpTicks + partialTicks) / (float) this.jumpDuration;
+    }
+
+    protected float getJumpPower() {
+        return horizontalCollision ? super.getJumpPower() + 0.2F : 0.25F + random.nextFloat() * 0.15F;
+    }
+
+    protected void jumpFromGround() {
+        super.jumpFromGround();
+        double d0 = this.moveControl.getSpeedModifier();
+        if (d0 > 0.0D) {
+            double d1 = this.getDeltaMovement().horizontalDistance();
+            if (d1 < 0.01D) {
+            }
+        }
+
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte) 1);
+        }
+
+    }
+
+    public void setMovementSpeed(double newSpeed) {
+        this.getNavigation().setSpeedModifier(newSpeed);
+        this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), newSpeed);
+    }
+
+    public void startJumping() {
+        this.setJumping(true);
+        this.jumpDuration = 10;
+        this.jumpTicks = 0;
+    }
+
+    private void checkLandingDelay() {
+        this.updateMoveTypeDuration();
+        this.disableJumpControl();
+    }
+
+    private void calculateRotationYaw(double x, double z) {
+        this.setYRot((float) (Mth.atan2(z - this.getZ(), x - this.getX()) * (double) (180F / (float) Math.PI)) - 90.0F);
+    }
+
+    private void enableJumpControl() {
+        if (jumpControl instanceof BurrowingFrogEntity.JumpHelperController) {
+            ((BurrowingFrogEntity.JumpHelperController) this.jumpControl).setCanJump(true);
+        }
+    }
+
+    private void disableJumpControl() {
+        if (jumpControl instanceof BurrowingFrogEntity.JumpHelperController) {
+            ((BurrowingFrogEntity.JumpHelperController) this.jumpControl).setCanJump(false);
+        }
+    }
+
+    private void updateMoveTypeDuration() {
+        if (this.moveControl.getSpeedModifier() < 2.2D) {
+            this.currentMoveTypeDuration = 2;
+        } else {
+            this.currentMoveTypeDuration = 1;
+        }
+
+    }
+
+    public void customServerAiStep() {
+        super.customServerAiStep();
+
+        if (this.currentMoveTypeDuration > 0) {
+            --this.currentMoveTypeDuration;
+        }
+
+        if (this.onGround) {
+            if (!this.wasOnGround) {
+                this.setJumping(false);
+                this.checkLandingDelay();
+            }
+
+            if (this.currentMoveTypeDuration == 0) {
+                LivingEntity livingentity = this.getTarget();
+                if (livingentity != null && this.distanceToSqr(livingentity) < 16.0D) {
+                    this.calculateRotationYaw(livingentity.getX(), livingentity.getZ());
+                    this.moveControl.setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), this.moveControl.getSpeedModifier());
+                    this.startJumping();
+                    this.wasOnGround = true;
+                }
+            }
+            if (this.jumpControl instanceof BurrowingFrogEntity.JumpHelperController) {
+                BurrowingFrogEntity.JumpHelperController rabbitController = (BurrowingFrogEntity.JumpHelperController) this.jumpControl;
+                if (!rabbitController.getIsJumping()) {
+                    if (this.moveControl.hasWanted() && this.currentMoveTypeDuration == 0) {
+                        Path path = this.navigation.getPath();
+                        Vec3 vector3d = new Vec3(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ());
+                        if (path != null && !path.isDone()) {
+                            vector3d = path.getNextEntityPos(this);
+                        }
+
+                        this.calculateRotationYaw(vector3d.x, vector3d.z);
+                        this.startJumping();
+                    }
+                } else if (!rabbitController.canJump()) {
+                    this.enableJumpControl();
+                }
+            }
+        }
+
+        this.wasOnGround = this.onGround;
+    }
+
+    public void aiStep() {
+        super.aiStep();
+        if (this.jumpTicks != this.jumpDuration) {
+            ++this.jumpTicks;
+        } else if (this.jumpDuration != 0) {
+            this.jumpTicks = 0;
+            this.jumpDuration = 0;
+            this.setJumping(false);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void handleEntityEvent(byte id) {
+        if (id == 1) {
+            this.spawnSprintParticle();
+            this.jumpDuration = 10;
+            this.jumpTicks = 0;
+        } else {
+            super.handleEntityEvent(id);
+        }
+
+    }
+
+    public boolean hasJumper() {
+        return jumpControl instanceof JumpHelperController;
+    }
+
+    static class MoveHelperController extends MoveControl {
+        private final BurrowingFrogEntity forg;
+        private double nextJumpSpeed;
+
+        public MoveHelperController(BurrowingFrogEntity forg) {
+            super(forg);
+            this.forg = forg;
+        }
+
+        public void tick() {
+            if (this.forg.hasJumper() && this.forg.onGround && !this.forg.jumping && !((BurrowingFrogEntity.JumpHelperController) this.forg.jumpControl).getIsJumping()) {
+                this.forg.setMovementSpeed(0.0D);
+            } else if (this.hasWanted()) {
+                this.forg.setMovementSpeed(this.nextJumpSpeed);
+            }
+            if (this.operation == MoveControl.Operation.MOVE_TO) {
+                this.operation = MoveControl.Operation.WAIT;
+                Vec3 vector3d = new Vec3(this.wantedX - forg.getX(), this.wantedY - forg.getY(), this.wantedZ - forg.getZ());
+                double d0 = vector3d.length();
+                forg.setDeltaMovement(forg.getDeltaMovement().add(vector3d.scale(this.speedModifier * 1.0F * 0.05D / d0)));
+
+            }
+            super.tick();
+
+        }
+
+        /**
+         * Sets the speed and location to move to
+         */
+        public void setWantedPosition(double x, double y, double z, double speedIn) {
+            if (this.forg.isInWater()) {
+                speedIn = 1.5D;
+            }
+
+            super.setWantedPosition(x, y, z, speedIn);
+            if (speedIn > 0.0D) {
+                this.nextJumpSpeed = speedIn;
+            }
+
+        }
+    }
+
+    public class JumpHelperController extends JumpControl {
+        private final BurrowingFrogEntity forg;
+        private boolean canJump;
+
+        public JumpHelperController(BurrowingFrogEntity forg) {
+            super(forg);
+            this.forg = forg;
+        }
+
+        public boolean getIsJumping() {
+            return this.jump;
+        }
+
+        public boolean canJump() {
+            return this.canJump;
+        }
+
+        public void setCanJump(boolean canJumpIn) {
+            this.canJump = canJumpIn;
+        }
+
+        public void tick() {
+            if (this.jump) {
+                this.forg.startJumping();
+                this.jump = false;
+            }
+
+        }
+    }
+
+    public boolean causeFallDamage(float distance, float damageMultiplier) {
+        return false;
+    }
+
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 }

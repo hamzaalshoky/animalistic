@@ -1,40 +1,27 @@
 package net.vladick.animalistic.entity.custom;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.animal.AbstractFish;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.scores.Team;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.vladick.animalistic.entity.variant.CavyVariant;
+import net.minecraft.world.phys.Vec3;
+import net.vladick.animalistic.entity.custom.ai.RandomActuallySwimGoal;
+import net.vladick.animalistic.entity.custom.ai.WaterMovementControl;
 import net.vladick.animalistic.item.ModItems;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -43,12 +30,17 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable{
+public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable, FlyingAnimal {
 
     private AnimationFactory factory = new AnimationFactory(this);
 
     public KrillEntity(EntityType<? extends AbstractFish> p_27461_, Level p_27462_) {
         super(p_27461_, p_27462_);
+        this.moveControl = new WaterMovementControl(this, 1.0F, 15F);
+    }
+
+    protected PathNavigation createNavigation(Level worldIn) {
+        return new WaterBoundPathNavigation(this, worldIn);
     }
 
 
@@ -64,7 +56,8 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
 
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this,1.0D, 1));
+        this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(5, new RandomActuallySwimGoal(this, 1F, 12, 5));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -74,6 +67,16 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
     @Override
     protected SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
+    }
+
+    protected void playSwimSound(float f) {
+        if(random.nextInt(2) == 0){
+            this.playSound(this.getSwimSound(), 0.2F, 1.3F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+        }
+    }
+
+    protected SoundEvent getSwimSound() {
+        return SoundEvents.FISH_SWIM;
     }
 
     // ANIMATIONS //
@@ -132,6 +135,20 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
         return s.toLowerCase().equals("baraberebere") || s.toLowerCase().equals("barbare") || s.toLowerCase().equals("barabere");
     }
 
+    public void travel(Vec3 travelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), travelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            float f = 0.6F;
+            this.setDeltaMovement(this.getDeltaMovement().multiply(0.9D, f, 0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(travelVector);
+        }
+    }
+
 
     public boolean fromBucket() {
         return false;
@@ -158,5 +175,10 @@ public class KrillEntity extends AbstractFish implements IAnimatable, Bucketable
 
     public SoundEvent getPickupSound() {
         return SoundEvents.BUCKET_FILL_FISH;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return false;
     }
 }

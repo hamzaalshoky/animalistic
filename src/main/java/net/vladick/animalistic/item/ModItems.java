@@ -13,6 +13,7 @@ import net.vladick.animalistic.Animalistic;
 import net.vladick.animalistic.entity.ModEntityCreator;
 import net.vladick.animalistic.item.custom.HairAlgaeItem;
 import net.vladick.animalistic.item.custom.SpikeSwordItem;
+import net.vladick.animalistic.sound.ModSounds;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -76,6 +77,18 @@ public class ModItems {
 
     public static final RegistryObject<Item> CHINCHILLA_SPAWN_EGG = ITEMS.register("chinchilla_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityCreator.CHINCHILLA,9405318, 10656409,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> GECKO_SPAWN_EGG = ITEMS.register("gecko_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityCreator.GECKO,11191471, 14577728,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> WORM_SPAWN_EGG = ITEMS.register("worm_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityCreator.WORM,15379660, 16753841,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> BROWN_SEA_SLUG_SPAWN_EGG = ITEMS.register("brown_sea_slug_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityCreator.BROWN_SEA_SLUG,14462088, 15255954,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
 
     public static final RegistryObject<Item> MUDPUPPY_BUCKET = ITEMS.register("mudpuppy_bucket",
@@ -157,6 +170,13 @@ public class ModItems {
     public static final RegistryObject<Item> CHINCHILLA_FUR_COAT = ITEMS.register("chinchilla_fur_coat",
             () -> new ArmorItem(ModArmorMaterials.CHINCHILLA_FUR, EquipmentSlot.CHEST,
                     new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> GECKO_TAIL = ITEMS.register("gecko_tail",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB)));
+
+    public static final RegistryObject<Item> FAUNAFUL_RECORD = ITEMS.register("faunaful_music_disc",
+            () -> new RecordItem(4, ModSounds.FAUNAFUL,
+                    new Item.Properties().tab(ModCreativeModeTabs.ANIMALISTIC_TAB).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -46,5 +46,11 @@
     "sounds": [
       "animalistic:cavy_death"
     ]
+  },
+  "record_faunaful": {
+    "subtitle": "sounds.animalistic.faunaful",
+    "sounds": [
+      "animalistic:record_faunaful"
+    ]
   }
 }

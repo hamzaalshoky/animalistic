@@ -36,6 +36,9 @@ public class ModSounds {
     public static RegistryObject<SoundEvent> CAVY_DEATH
             = registerSoundEvents("cavy_death");
 
+    public static RegistryObject<SoundEvent> FAUNAFUL
+            = registerSoundEvents("record_faunaful");
+
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         ResourceLocation id = new ResourceLocation(Animalistic.MOD_ID, name);
         return SOUND_EVENTS.register(name, () -> new SoundEvent(id));

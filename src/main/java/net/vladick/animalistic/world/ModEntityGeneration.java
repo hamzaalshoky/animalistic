@@ -159,6 +159,27 @@ public class ModEntityGeneration {
         if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
             event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.CHINCHILLA.get(), 6, 1, 3));
         }
+        if(doesBiomeMatch(event.getName(), Biomes.PLAINS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.GECKO.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.GECKO.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.FOREST)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.GECKO.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.PLAINS)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.WORM.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.DESERT)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.WORM.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.FOREST)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.WORM.get(), 6, 1, 3));
+        }
+        if(doesBiomeMatch(event.getName(), Biomes.STONY_SHORE)) {
+            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntityCreator.BROWN_SEA_SLUG.get(), 2, 1, 2));
+        }
     }
 
     public static boolean doesBiomeMatch(ResourceLocation biomeNameIn, ResourceKey<Biome> biomeIn) {

@@ -83,7 +83,6 @@ public class ChinchillaEntity extends TamableAnimal implements IAnimatable{
         this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(5, (new HurtByTargetGoal(this)).setAlertOthers());
         this.goalSelector.addGoal(1, new ChinchillaBeg(this, 1.0D));
     }
 

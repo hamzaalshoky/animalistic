@@ -62,7 +62,7 @@ public class CapybaraEntity extends Animal implements IAnimatable, ItemSteerable
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.15f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.2f).build();
     }
 
     protected void registerGoals() {
