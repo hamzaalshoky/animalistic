@@ -1,5 +1,6 @@
 package net.vladick.animalistic.entity.custom;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -27,7 +28,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import net.vladick.animalistic.entity.ModEntityCreator;
+import net.vladick.animalistic.entity.custom.ai.RandomActuallySwimGoal;
+import net.vladick.animalistic.entity.custom.ai.SemiAquaticMob;
+import net.vladick.animalistic.entity.custom.ai.WaterMovementControl;
 import net.vladick.animalistic.entity.variant.MudpuppyVariant;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -42,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
+public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable, SemiAquaticMob, FlyingAnimal {
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(MudpuppyEntity.class, EntityDataSerializers.INT);
@@ -53,7 +58,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
     public MudpuppyEntity(EntityType<? extends Animal> p_27557_, Level p_27558_) {
         super(p_27557_, p_27558_);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.moveControl = new WaterMovementControl(this, 1.0F, 15F);
     }
 
 
@@ -85,7 +90,7 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
-        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(5, new RandomActuallySwimGoal(this, 1F, 12, 5));
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D, 10));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, (double)1.2F, true));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
@@ -94,6 +99,30 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Cod.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, TropicalFish.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, KrillEntity.class, 5, true, true, (Predicate<LivingEntity>)null));
+    }
+
+    protected void playSwimSound(float f) {
+        if(random.nextInt(2) == 0){
+            this.playSound(this.getSwimSound(), 0.2F, 1.3F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+        }
+    }
+
+    protected SoundEvent getSwimSound() {
+        return SoundEvents.FISH_SWIM;
+    }
+
+    public void travel(Vec3 travelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), travelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            float f = 0.6F;
+            this.setDeltaMovement(this.getDeltaMovement().multiply(0.9D, f, 0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(travelVector);
+        }
     }
 
     @Nullable
@@ -140,6 +169,31 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
             return super.finalizeSpawn(p_149132_, p_149133_, p_149134_, p_149135_, p_149136_);
         }
+    }
+
+    @Override
+    public boolean shouldEnterWater() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldLeaveWater() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldStopMoving() {
+        return false;
+    }
+
+    @Override
+    public int getWaterSearchRange() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return false;
     }
 
     public static class MudpuppyGroupData extends AgeableMob.AgeableMobGroupData {
@@ -298,5 +352,10 @@ public class MudpuppyEntity extends Animal implements IAnimatable, Bucketable {
 
         }
         return InteractionResult.CONSUME;
+    }
+
+    public boolean isPuppy() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && s.toLowerCase().contains("puppy");
     }
 }

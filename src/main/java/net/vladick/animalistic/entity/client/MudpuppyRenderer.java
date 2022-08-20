@@ -24,6 +24,8 @@ public class MudpuppyRenderer extends GeoEntityRenderer<MudpuppyEntity> {
                         new ResourceLocation(Animalistic.MOD_ID, "textures/entity/mudpuppy/mudpuppy_golden.png"));
             });
 
+    private static final ResourceLocation PUP = new ResourceLocation("animalistic:textures/entity/mudpuppy/mud_puppy.png");
+
     public MudpuppyRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new MudpuppyModel());
         this.shadowRadius = 0.3f;

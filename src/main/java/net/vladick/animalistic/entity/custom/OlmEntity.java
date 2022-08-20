@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cod;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -30,8 +31,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityCreator;
+import net.vladick.animalistic.entity.custom.ai.RandomActuallySwimGoal;
+import net.vladick.animalistic.entity.custom.ai.SemiAquaticMob;
+import net.vladick.animalistic.entity.custom.ai.WaterMovementControl;
 import net.vladick.animalistic.entity.variant.OlmVariant;
 import net.vladick.animalistic.item.ModItems;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -46,7 +51,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class OlmEntity extends Animal implements IAnimatable{
+public class OlmEntity extends Animal implements IAnimatable, SemiAquaticMob, FlyingAnimal {
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(OlmEntity.class, EntityDataSerializers.INT);
@@ -55,7 +60,7 @@ public class OlmEntity extends Animal implements IAnimatable{
 
     public OlmEntity(EntityType<? extends Animal> p_27557_, Level p_27558_) {
         super(p_27557_, p_27558_);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.moveControl = new WaterMovementControl(this, 1.0F, 15F);
     }
 
 
@@ -87,7 +92,7 @@ public class OlmEntity extends Animal implements IAnimatable{
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
-        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(5, new RandomActuallySwimGoal(this, 1F, 12, 5));
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D, 10));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, (double)1.2F, true));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
@@ -96,6 +101,16 @@ public class OlmEntity extends Animal implements IAnimatable{
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Cod.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, TropicalFish.class, 5, true, true, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, KrillEntity.class, 5, true, true, (Predicate<LivingEntity>)null));
+    }
+
+    protected void playSwimSound(float f) {
+        if(random.nextInt(2) == 0){
+            this.playSound(this.getSwimSound(), 0.2F, 1.3F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+        }
+    }
+
+    protected SoundEvent getSwimSound() {
+        return SoundEvents.FISH_SWIM;
     }
 
     @Nullable
@@ -118,6 +133,20 @@ public class OlmEntity extends Animal implements IAnimatable{
 
     public boolean isFood(ItemStack pStack) {
         return pStack.getItem() == Items.COD || pStack.getItem() == ModItems.RAW_KRILL.get();
+    }
+
+    public void travel(Vec3 travelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), travelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            float f = 0.6F;
+            this.setDeltaMovement(this.getDeltaMovement().multiply(0.9D, f, 0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(travelVector);
+        }
     }
 
     // ANIMATIONS //
@@ -255,5 +284,30 @@ public class OlmEntity extends Animal implements IAnimatable{
 
         }
         return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public boolean shouldEnterWater() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldLeaveWater() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldStopMoving() {
+        return false;
+    }
+
+    @Override
+    public int getWaterSearchRange() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return false;
     }
 }

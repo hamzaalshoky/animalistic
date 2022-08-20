@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -16,7 +17,9 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.vladick.animalistic.Animalistic;
+import net.vladick.animalistic.effects.ModEffects;
 import net.vladick.animalistic.entity.ModEntityCreator;
+import net.vladick.animalistic.entity.custom.SeaSlugEntity;
 import net.vladick.animalistic.item.ModItems;
 
 import java.util.List;
